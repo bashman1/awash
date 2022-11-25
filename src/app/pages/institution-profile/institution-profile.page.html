@@ -1,0 +1,140 @@
+<ion-header color="primary">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="new-login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{basicInstData.institution_name}} Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>General Information</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            Institution Name
+          </ion-col>
+          <ion-col class="align-self-end">
+            {{basicInstData.institution_name}}
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            Institution Reference Number
+          </ion-col>
+          <ion-col class="align-self-end">
+            {{basicInstData.institution_ref_number}}
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            Institution Address
+          </ion-col>
+          <ion-col class="align-self-end">
+            {{basicInstData.name+', '+basicInstData.district_name
+            +', '+basicInstData.county_name+', '+basicInstData.sub_county_name+', '+basicInstData.parish_name}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Contact Information</ion-card-title>
+
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            Contact Person
+          </ion-col>
+          <ion-col class="align-self-end">
+            {{ basicInstData.contactpersonname }}
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            Position
+          </ion-col>
+          <ion-col class="align-self-end">
+            {{basicInstData.position}}
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            Email Address
+          </ion-col>
+          <ion-col class="align-self-end">
+            {{basicInstData.email}}
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            Telephone
+          </ion-col>
+          <ion-col class="align-self-end">
+            {{basicInstData.primary_contact}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Bank Information</ion-card-title>
+
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row>
+        <ion-col>
+          Bank Name
+        </ion-col>
+        <ion-col class="align-self-end">
+          {{basicInstData.bankname}}
+        </ion-col>
+      </ion-row>
+
+      <!-- <ion-row>
+        <ion-col>
+          Account Type
+        </ion-col>
+        <ion-col class="align-self-end">
+          Institution Name
+        </ion-col>
+      </ion-row> -->
+
+      <ion-row>
+        <ion-col>
+          Account Name
+        </ion-col>
+        <ion-col class="align-self-end">
+          {{basicInstData.account_name}}
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          Account Number
+        </ion-col>
+        <ion-col class="align-self-end">
+          {{basicInstData.account_number}}
+        </ion-col>
+      </ion-row>     
+      
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

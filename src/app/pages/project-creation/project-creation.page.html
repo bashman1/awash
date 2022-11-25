@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+      </ion-buttons>
+    <ion-title>Project Creation</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form [formGroup]="projectForm" (ngSubmit)="submit()">
+
+  <ion-item>
+    <ion-label class="ion-text-wrap" position="stacked">Project Name</ion-label>
+    <ion-input placeholder="eg.Mama Tendo" formControlName="projectName" type="text"></ion-input>  
+  </ion-item>
+
+  <ion-item>
+    <ion-label class="ion-text-wrap" position="stacked">Project Category</ion-label>
+    <ion-select formControlName="category" okText="Okay" cancelText="Dismiss">
+      <ion-select-option value="retail">Retail</ion-select-option>
+      <ion-select-option value="service">Service</ion-select-option>
+      <ion-select-option value="manufucturing">Manufucturing</ion-select-option>
+      </ion-select>
+  </ion-item>
+
+  <ion-item>
+      <ion-label class="ion-text-wrap" position="stacked">Project Description</ion-label>
+      <ion-input placeholder="eg. Restocking" formControlName="projectDescription" type="text"></ion-input>  
+    </ion-item>
+
+    <ion-button color="primary" type="submit" fill="solid">Submit</ion-button>
+
+</form>  
+</ion-content>

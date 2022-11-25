@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-toolbar class="top-header">
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
+    <ion-title>Loan Application</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+
+  <ion-card>
+    <form [formGroup]="loanApplicationFormGp" *ngIf="loanApplicationFormGp" (ngSubmit)="onSubmit()" id="form">
+      <!-- <ion-item>
+        <div>{{name+' | '+ custNo}}</div>
+      </ion-item> -->
+      <mat-vertical-stepper formArrayName="loanInfo" linear="true" #stepper>
+        <mat-step formGroupName="0" [stepControl]="basicForm.controls['0']">
+          <ng-template matStepLabel>Loan Information</ng-template>
+          <!-- <p>You qualify for {{ apiLoanValidations?.limit? apiLoanValidations?.limit:''}} UGX based on your Savings Pattern</p> -->
+          <p *ngIf="!apiLoanValidations?.limit">According to the credit scoring performed ,You are not eligible for any loan amount.Continue Banking with us to improve your credit score</p>
+          <p *ngIf="apiLoanValidations?.limit"> You qualify for {{apiLoanValidations?.limit | number: '1.0-0'}} UGX
+            You can proceed to apply for that amount or less than that.</p>
+          <div *ngIf="apiLoanValidations?.limit">
+            <button class="submit" type="button" mat-button matStepperNext>Continue</button>
+          </div>
+        </mat-step>
+        <mat-step formGroupName="1" [stepControl]="basicForm.controls['1']" *ngIf="apiLoanValidations?.limit">
+          <ng-template matStepLabel>Loan Amount</ng-template>
+          <div class="row">
+            <div class="col-sm-10">
+              <mat-form-field>
+                <mat-label>Loan Amount</mat-label>
+                <input isFocused=true (keyup)="validate(); logValidationErrors();" type="text" (blur)="logValidationErrors();" 
+                matInput placeholder="Enter Loan Amount" formControlName="loanPrincipal" required>
+                <!-- <mat-error *ngIf="amountError.length > 0">{{ formErrors.loanPrincipal }}</mat-error> -->
+                <mat-error *ngIf="formErrors.loanPrincipal">{{ formErrors.loanPrincipal }}</mat-error>
+                <!-- <mat-error>
+                  You only qualify for a loan below ETB
+                </mat-error> -->
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <button 
+            isDisabled="amountValue.invalid || apiLoanValidations?.limit < removeC(amountValue.controls.loanPrincipal.value) " class="submit col-sm-6" type="button" mat-button matStepperNext>Continue</button>
+          </div>
+        </mat-step>
+        <mat-step formGroupName="2" [stepControl]="basicForm.controls['2']" *ngIf="apiLoanValidations?.limit">
+          <ng-template matStepLabel>Accept Terms And Conditions</ng-template>
+          <p>Terms and conditions</p>
+          <section class="example-section">
+            <mat-checkbox formControlName="terms_and_conditions" (change) = "checked($event)" color="primary" class="example-margin">I accept terms and conditions</mat-checkbox>
+          </section>
+        </mat-step>
+      </mat-vertical-stepper>
+
+
+  
+      <ion-button *ngIf="apiLoanValidations?.limit" [disabled]="status" type="submit" expand="block">Submit</ion-button> 
+    </form>
+
+    <div id="table">
+      <table class="table">
+        <tr>
+          <th class="hd">Principal Amount</th>
+          <td class="bdy">{{applicationResults.principalAmount | number:'1.0-0'}}</td>
+        </tr>
+        <tr>
+          <th class="hd">Interest Rate</th>
+          <td class="bdy">{{applicationResults.interestRate}}</td>
+        </tr>
+        <tr>
+          <th class="hd">Account No</th>
+          <td class="bdy">{{applicationResults.acctNo}}</td>
+        </tr>
+        <tr> 
+          <th class="hd">Amount Paid</th>
+          <td class="bdy">{{applicationResults.amountPaid}}</td>
+        </tr>
+        <tr> 
+          <th class="hd">Loan Status</th>
+          <td class="bdy">{{applicationResults.loanStatus}}</td>
+        </tr>
+        <tr> 
+          <th class="hd">Number Of Payments</th>
+          <td class="bdy">{{applicationResults.numberOfPayments}}</td>
+        </tr>
+        <!-- <tr> 
+          <th class="hd">Head</th>
+          <td class="bdy">{{applicationResults.}}</td>
+        </tr> -->
+
+      </table>
+    </div>
+
+    <div class="worning" *ngIf="loanDetails.collateral_required || loanDetails.guarantors_required">
+      <div *ngIf="loanDetails.collateral_required">Collaterals are required please contact office for more info</div>
+      <div *ngIf="loanDetails.guarantors_required">Guarantors are required please contact office for more info</div>
+    </div>
+    <div *ngIf="!loanDetails.collateral_required && !loanDetails.guarantors_required">
+      <!-- <h1>works</h1> -->
+    </div>
+
+    <!-- <ion-button (click)="test()" expand="block">toster</ion-button> -->
+
+  </ion-card>
+  
+
+</ion-content>

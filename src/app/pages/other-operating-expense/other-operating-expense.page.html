@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+ 
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h3>Add Other Operating Expense</h3>
+  <form [formGroup]="operatingExpenseForm" (ngSubmit)="addExpense()">
+    <ion-item>
+      <ion-input formControlName="name" placeholder="Family Expense Name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-input type="number" formControlName="amount" placeholder="Expense Value"></ion-input>
+      </ion-item>
+
+      <ion-button (click)="onClick()">cancel</ion-button>
+      <ion-button [disabled]="operatingExpenseForm.invalid" type="submit">add</ion-button>
+
+  </form>
+</ion-content>

@@ -1,0 +1,8 @@
+{
+  "name": "HFB Club",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

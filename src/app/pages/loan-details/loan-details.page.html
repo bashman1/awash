@@ -1,0 +1,112 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/menu/landing"></ion-back-button>
+      </ion-buttons>
+  <ion-title>
+    Loan Details
+  </ion-title>
+</ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+  
+
+    <p>Loan Details</p>
+    <form [formGroup]="loanDetails" (ngSubmit)="submit()">
+      <ion-item>
+      <ion-label class="ion-text-wrap" position="stacked">What Loan Amount are you applying for?</ion-label>
+      <ion-input placeholder="eg.100000" formControlName="amount1" type="number"></ion-input>
+    
+    </ion-item>
+    
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.amount1">
+        <div class="error-message"
+          *ngIf="loanDetails.get('amount1').hasError(validation.type) && (loanDetails.get('amount1').dirty || loanDetails.get('amount1').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+    
+    <ion-item>
+    
+      <ion-label class="ion-text-wrap" position="stacked">Frequency of Payment?</ion-label>
+      <ion-select formControlName="durationUnit" okText="Okay" cancelText="Dismiss">
+          <ion-select-option value="Day(s)">Day(s)</ion-select-option>
+          <ion-select-option value="Week(s)">Weeks(s)</ion-select-option>
+          <ion-select-option value="Month(s)">Month(s)</ion-select-option>
+          <ion-select-option value="Year(s)">Year(s)</ion-select-option>
+        </ion-select>
+    </ion-item>
+    
+    <ion-item>
+    
+      <ion-label class="ion-text-wrap" position="stacked">For how long would you like to service this loan in months?</ion-label>
+      <ion-input placeholder="5" formControlName="duration" type="number"></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.duration">
+        <div class="error-message"
+          *ngIf="loanDetails.get('duration').hasError(validation.type) && (loanDetails.get('duration').dirty || loanDetails.get('duration').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+    
+    <ion-item>
+    
+        <ion-label class="ion-text-wrap" position="stacked">Interest Method?</ion-label>
+        <ion-select formControlName="interestMethod" okText="Okay" cancelText="Dismiss">
+            <ion-select-option value="flat_rate">Flat Rate</ion-select-option>
+            <ion-select-option value="reducing_rate">Reducing Balance</ion-select-option>
+           
+          </ion-select>
+      </ion-item>
+    
+    <ion-item>
+        <ion-label class="ion-text-wrap" position="stacked">What interest rate is the bank charging per year?</ion-label>
+        <ion-input placeholder="Enter % value e.g 10" formControlName="rate" type="number"></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.rate">
+          <div class="error-message"
+            *ngIf="loanDetails.get('rate').hasError(validation.type) && (loanDetails.get('rate').dirty || loanDetails.get('rate').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+    
+    <ion-item>
+      <ion-label class="ion-text-wrap" position="stacked">How much can you pay back monthly?</ion-label>
+      <ion-input placeholder="30000" formControlName="fee" type="number"></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.fee">
+        <div class="error-message"
+          *ngIf="loanDetails.get('fee').hasError(validation.type) && (loanDetails.get('fee').dirty || loanDetails.get('fee').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+    
+    <ion-item>
+      <ion-label class="ion-text-wrap" position="stacked">What is the total value of collateral/security you have pledged for the loan?</ion-label>
+      <ion-input placeholder="100000" formControlName="collateral" type="number"></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.collateral">
+        <div class="error-message"
+          *ngIf="loanDetails.get('collateral').hasError(validation.type) && (loanDetails.get('collateral').dirty || loanDetails.get('collateral').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+    
+    <ion-button color="primary" type="submit" fill="solid">Submit</ion-button>
+    
+    </form>
+    
+    </ion-card>
+</ion-content>

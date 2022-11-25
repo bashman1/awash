@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Add Stock</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form #stockForm="ngForm" (ngSubmit)="addStock()" novalidate>
+  <ion-item>
+    <ion-label position="stacked">Product/Item</ion-label>
+    <ion-input placeholder="Battery" name="productName" [(ngModel)]="stock.productName" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+      <ion-label position="stacked">Quantity</ion-label>
+      <ion-input placeholder="10" name="quantity" [(ngModel)]="stock.quantity" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="stacked">How much did you buy each at?</ion-label>
+        <ion-input placeholder="2000" name="cost" [(ngModel)]="stock.cost" type="number"></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-label position="stacked">How much did you sell each at?</ion-label>
+          <ion-input placeholder="40000" name="price" [(ngModel)]="stock.price" type="number"></ion-input>
+      </ion-item>
+   
+     
+        <ion-button color="danger" (click)="dismiss()">Cancel</ion-button>
+        <ion-button color="success" (click)="save()">Save</ion-button>
+        <!-- <ion-button color="primary" type="submit">Add</ion-button> -->
+        <ion-fab vertical="center" horizontal="end" slot="fixed">
+          <ion-fab-button (click)="addStock()">
+            <ion-icon name="add"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+   
+      </form>  
+</ion-content>

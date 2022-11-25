@@ -1,0 +1,66 @@
+<ion-content>
+
+
+  
+  <div class="div-logo">
+    <ion-img class="img" src="../../assets/img/mobilemenu.png" alt="Logo"></ion-img>
+  </div>
+
+
+    <div class="login-collaction">
+    <div class="nepserv" style="color: #1f81c5">
+      Reset Password
+    </div>
+    
+    <form  [formGroup]="resetPassword" (ngSubmit)="passReset()">
+
+    <ion-grid>
+      <ion-row color="primary">
+        <ion-col size-md="12" size-lg="12" size-xs="12">
+
+
+          <div>
+            <ion-item>
+           <ion-icon name="lock-closed-outline"></ion-icon>
+
+            <ion-input formControlName="newPassword" type="password" placeholder="New Password" style="padding-left: 10px"></ion-input>
+
+            </ion-item>
+    
+            <div class="validation-errors" style="margin-bottom: 20px;">
+              <ng-container *ngFor="let validation of validation_messages.newPassword">
+                <div class="error-message"
+                  *ngIf="resetPassword.get('newPassword').hasError(validation.type) && (resetPassword.get('newPassword').dirty || resetPassword.get('newPassword').touched)">
+                  {{ validation.message }}
+                </div>
+              </ng-container>
+            </div>  
+          </div>
+
+          <div>
+            <ion-item>
+               <ion-icon name="lock-closed-outline"></ion-icon>
+
+              <ion-input formControlName="confirmPassword" type="password" placeholder="Confirm Password" style="padding-left: 10px"></ion-input>
+
+            </ion-item>
+            <ion-label *ngIf="resetPassword.controls['confirmPassword'].errors?.MatchPassword" style="color: red">
+              Passwords do not match
+            </ion-label> 
+          </div>
+ 
+       
+
+            <ion-button class="margin-top" size="small"  type="submit"  expand="block">Reset Password</ion-button>
+
+           <ion-button size="small" (click)="closeModal()" class="back-btn color-white" fill="clear" expand="block">Back</ion-button> 
+  
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+  </div>
+  
+
+</ion-content>

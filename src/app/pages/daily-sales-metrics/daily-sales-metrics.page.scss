@@ -1,0 +1,22 @@
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+
+:root {
+    --ion-safe-area-top: 100px;
+    --ion-safe-area-bottom: 220px;
+  }
+  ion-radio{
+    --color-checked:orange;
+  
+  }
+ion-item{
+  --padding-top:-100px;
+}
+ion-input{
+  border-bottom: 1px solid rgba(25, 0, 0, 0.71);
+}
+  
+  

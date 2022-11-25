@@ -1,0 +1,492 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/menu/loan-appraisal"></ion-back-button>
+        </ion-buttons>
+    <ion-title>Report</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content scrollX="true">
+    <ion-segment color="primary">
+        <ion-segment-button value="loanDetails" color="primary" (ionSelect)="loanDetails()" checked>
+          <ion-icon name="home"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button value="balanceSheet" (ionSelect)="balanceSheet()">
+          <ion-icon name="calculator"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button value="cashFlow" (ionSelect)="cashFlow()">
+          <ion-icon name="cash"></ion-icon>
+        </ion-segment-button>        
+        <ion-segment-button value="calender" (ionSelect)="calender()">
+          <ion-icon name="calendar"></ion-icon>
+          </ion-segment-button>
+        <ion-segment-button value="estimate" (ionSelect)="estimate()">
+
+            <ion-icon name="podium"></ion-icon>
+    </ion-segment-button>
+      </ion-segment>
+
+    <div *ngIf="(reportList | json) != '{}'">
+        <ion-card id="cashflow" style="display: none">
+            <p>Cash Flow</p>
+            <ion-grid>
+                <ion-row>
+                    <ion-col id="headers">
+                        Inflow
+                    </ion-col>
+                    <ion-col id="amountheader" class="align-self-end">{{ reportList.buz_inflow  | number:'1.0'}}</ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col>
+                        Sales
+                    </ion-col>
+                    <ion-col id="amount" class="align-self-end">{{ reportList.sales  | number:'1.0'}}</ion-col>
+
+                </ion-row>
+
+                <ion-row>
+                    <ion-col>
+                        Other Business Income
+                    </ion-col>
+                    <ion-col id="amount" class="align-self-end">{{reportList.other_buz_monthly_earnings  | number:'1.0'}}</ion-col>
+
+                </ion-row>
+
+                <ion-row>
+                    <ion-col>
+                        Family Earning
+                    </ion-col>
+                    <ion-col id="amount" class="align-self-end">{{ reportList.spouse_surplus  | number:'1.0'}}</ion-col>
+
+                </ion-row>
+                <br/>
+                <ion-row>
+                    <ion-col id="headers">
+                        Outflow
+                    </ion-col>
+                    <ion-col id="amountheader" class="align-self-end">{{ reportList.buz_outflow  | number:'1.0'}}</ion-col>
+
+                </ion-row>
+
+                <ion-row>
+                    <ion-col>
+                        Cost of Sales
+                    </ion-col>
+                    <ion-col id="amount" class="align-self-end">{{ reportList.cost_of_sales  | number:'1.0'}}</ion-col>
+
+                </ion-row>
+
+                <ion-row>
+                    <ion-col>
+                        Business Operating Expense
+                    </ion-col>
+                    <ion-col id="amount" class="align-self-end">{{ reportList.total_business_expense  | number:'1.0'}}</ion-col>
+
+                </ion-row>
+
+                <ion-row>
+                    <ion-col>
+                        Family Expense
+                    </ion-col>
+                    <ion-col id="amount" class="align-self-end">{{ reportList.total_family_expense  | number:'1.0'}}</ion-col>
+
+                </ion-row>
+
+                <ion-row>
+                    <ion-col>
+                        Available Surplus
+                    </ion-col>
+                    <ion-col id="amount" class="align-self-end">{{ reportList.buz_inflow-reportList.buz_outflow  | number:'1.0' }}</ion-col>
+
+                </ion-row>
+            </ion-grid>
+        </ion-card>
+
+
+
+
+        <div id="balanceSheet" style="display: none">
+            <p>Balance Sheet</p>
+            <ion-card>
+                <ion-grid>
+
+                    <ion-row>
+                        <ion-col id="headers">Current Assets</ion-col>
+                        <ion-col class="totals" id="amountheader">{{reportList.current_assets | number:'1.0'}}</ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>Cash</ion-col>
+                        <ion-col id="amount">{{reportList.buz_cash | number:'1.0'}}</ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>Bank</ion-col>
+                        <ion-col id="amount">{{reportList.buz_cash_at_bank | number:'1.0'}}
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>Recievables</ion-col>
+                        <ion-col id="amount">{{reportList.receivables | number:'1.0'}}
+
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>Inventory</ion-col>
+                        <ion-col id="amount">{{reportList.total_inventory | number:'1.0'}}
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card>
+
+            <ion-card>
+                <ion-grid>
+
+                    <ion-row>
+                        <ion-col id="headers">Fixed Assets</ion-col>
+                        <ion-col class="totals" id="amountheader">{{reportList.fixed_assets | number:'1.0'}}</ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>Furniture</ion-col>
+                        <ion-col id="amount">{{reportList.value_of_furniture | number:'1.0'}}</ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>Equipment/tools</ion-col>
+                        <ion-col id="amount">{{reportList.value_of_equipment | number:'1.0'}}
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>Vehicle</ion-col>
+                        <ion-col id="amount">{{reportList.value_of_vehicle | number:'1.0'}}
+
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>Business premises</ion-col>
+                        <ion-col id="amount">{{reportList.value_of_buz_premises | number:'1.0'}}
+                        </ion-col>
+                    </ion-row>
+
+                </ion-grid>
+
+            </ion-card>
+
+
+            <ion-card>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col id="headers">Total Assets</ion-col>
+                        <ion-col class="totals" id="amountheader">{{reportList.fixed_assets+reportList.current_assets | number:'1.0'}}</ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card>
+
+            <ion-card>
+                <ion-grid>
+
+                    <ion-row>
+                        <ion-col id="headers">Short term liabilities</ion-col>
+                        <ion-col class="totals" id="amountheader">{{reportList.debts_due_in | number:'1.0'}}</ion-col>
+                    </ion-row>
+
+
+                    <!--  <ion-row>
+                                            <ion-col>Loans</ion-col>
+                                            <ion-col id="amount">{{loan | number:'1.0'}}</ion-col>
+                                        </ion-row>
+
+                                        <ion-row>
+                                            <ion-col>Short term debt</ion-col>
+                                            <ion-col id="amount">{{shortTermDebt | number:'1.0'}}</ion-col>
+                                        </ion-row>-->
+                </ion-grid>
+            </ion-card>
+
+            <ion-card>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col id="headers">Long term liabilities</ion-col>
+                        <ion-col class="totals" id="amountheader">{{reportList.debts_due_over | number:'1.0'}}</ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card>
+
+            <ion-card>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col id="headers">Total liabilities</ion-col>
+                        <ion-col class="totals" id="amountheader">{{reportList.current_liabilities+reportList.long_term_liabilities | number:'1.0'}}</ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col id="headers">Equity</ion-col>
+                        <ion-col class="totals" id="amountheader">{{(reportList.fixed_assets+reportList.current_assets)-(reportList.current_liabilities+reportList.long_term_liabilities) | number:'1.0'}}</ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col id="headers">Liability and Equity</ion-col>
+                        <ion-col class="totals" id="amountheader">{{(reportList.fixed_assets+reportList.current_assets) | number:'1.0'}}</ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card>
+        </div>
+
+
+
+        <div id="loanDetails">
+            <ion-card>
+                <ion-grid fixed>
+                    <ion-row>
+                        <ion-col>Loan Amount:</ion-col>
+                        <ion-col class="totals" id="amount">{{reportList.loan_amt_apply | number:'1.2-2'}}</ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>Loan Term({{reportList.duration_unit}}):</ion-col>
+                        <ion-col id="amount">{{reportList.loan_service_time | number:'1.2-2'}} </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>Interest Rate:</ion-col>
+                        <ion-col id="amount">{{reportList.interest_rate/100 | percent:'1.2'}} </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col>Installment Per Month:</ion-col>
+                        <ion-col class="totals" id="amount">{{reportList.loan_installment | number:'1.2-2'}}</ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card>
+
+            <ion-card>
+                <p>Financial ratios</p>
+                <ion-grid fixed>
+                    <ion-row>
+                        <ion-col id="header">Liquidity</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col id="center">Quick Ratio</ion-col>
+                        <ion-col [ngStyle]="{'background-color':color1}" class="qR" id="amount">{{reportList.quick_ratio | number:'1.2-2'}}</ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col id="center">Current Ratio</ion-col>
+                        <ion-col [ngStyle]="{'background-color':color2}" class="cR" id="amount">{{reportList.current_ratio | number:'1.2-2'}}</ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col id="header">Leverage/Safety</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col id="center">Debt/Equity</ion-col>
+                        <ion-col [ngStyle]="{'background-color':color3}" class="leverage" id="amount">{{reportList.debt_equity/100 | percent:'1.2'}}</ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col id="header">Profitability</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col id="center">Return on Assets</ion-col>
+                        <ion-col [ngStyle]="{'background-color':color4}" class="profitability" id="amount">{{reportList.return_on_assets/100 | percent:'1.2'}}</ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col id="header">Cashflow</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col id="center">Installment to Net Profit</ion-col>
+                        <ion-col [ngStyle]="{'background-color':color5}" class="Cashflow" id="amount">{{reportList.installment_net_profit/100 | percent:'1.2'}}</ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col id="header">Activity</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col id="center">Net Profit Margin</ion-col>
+                        <ion-col [ngStyle]="{'background-color':color6}" class="netProfitMargin" id="amount">{{reportList.net_profit_margin | number:'1.2-2'}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col id="center">Inventory Turnover(days)</ion-col>
+                        <ion-col [ngStyle]="{'background-color':color7}" class="turnover" id="amount">{{reportList.inventory_turn_over | number:'1.2-2'}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <!-- class="salesMargin" -->
+                        <ion-col id="center">Sales Margin</ion-col>
+                        <ion-col id="amount">{{reportList.sales_margin/100 | percent}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col id="center">Operation Profit</ion-col>
+                        <ion-col id="amount">{{reportList.operating_profit | number:'1.0'}}</ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col id="center">Net Working Capital</ion-col>
+                        <ion-col id="amount">{{reportList.return_on_assets | number:'1.0'}}</ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col id="header">Characteristic with Loan</ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col id="center">Repayment Capacity</ion-col>
+                        <ion-col [ngStyle]="{'background-color':color8}" class="repaymentCapacity" id="amount">{{reportList.repayment_capacity/100 | percent:'1.2'}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col id="center">Collateral coverage</ion-col>
+                        <ion-col [ngStyle]="{'background-color':color9}" class="collateralCoverage" id="amount">{{reportList.collateral_coverage/100 | percent:'1.2'}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col id="center">Debt Ratio</ion-col>
+                        <ion-col [ngStyle]="{'background-color':color10}" class="debtRatio" id="amount">{{reportList.debt_ratio/100 | percent:'1.2'}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col id="center">Borrower's Household Usage</ion-col>
+                        <ion-col [ngStyle]="{'background-color':color11}" class="household" id="amount">{{reportList.house_hold_usage/100 | percent:'1.2'}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col id="center">Loan/Monthly Sales</ion-col>
+                        <ion-col id="amount">{{reportList.loan_to_monthly_sales/100 | percent}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col id="center">(Liabilities and Loan)/Equity</ion-col>
+                        <ion-col id="amount">{{reportList.liabilities_to_equity/100 | percent}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col id="center">Loan/Working Capital Ratio</ion-col>
+                        <ion-col id="amount">{{reportList.loan_to_working_capital/100 | percent}}</ion-col>
+                    </ion-row>
+
+
+                </ion-grid>
+            </ion-card>
+        </div>
+        <div id="calender" style="display: none">
+            <table>
+                <thead>
+                <tr>
+                    <th>#</th>
+
+                    <th>Opening Balance</th>
+                    <th>Interest Payable</th>
+                    <th>Principal Payable</th>
+                    <th>Loan Installment</th>
+                    <th>Closing Bal</th>
+                    <th>Total Paid</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let repaymentCycle of repaymentSchedule">
+
+                    <td>{{ repaymentCycle.number}}</td>
+
+                    <td>{{ repaymentCycle.openingbal | number:'1.0-0'}}</td>
+                    <td>{{ repaymentCycle.intpayable | number:'1.0-0'}}</td>
+                    <td>{{ repaymentCycle.prinpayable | number:'1.0-0'}}</td>
+                    <td>{{ repaymentCycle.installmentamount | number:'1.0-0'}}</td>
+                    <td>{{ repaymentCycle.closingbal | number:'1.0-0' }}</td>
+                    <td>{{ repaymentCycle.totalpaid | number:'1.0-0' }}</td>
+
+                </tr>
+                </tbody>
+
+            </table>
+            <strong color="primary"><i>*The repayment cycle is in {{reportList.duration_unit}}</i> </strong>
+        </div>
+        <div id="estimate" style="display: none">
+            <ion-card>
+                  <ion-label>Loan Amount</ion-label>
+                    <ion-range [(ngModel)]="loanAmount" (ionChange)="estimateCalc()" min="0" max="50000000" pin color="primary">
+                        <ion-label slot="end">{{ loanAmount | number}}</ion-label>
+
+                    </ion-range>
+
+
+                    <ion-label>Loan Duration</ion-label>
+                    <ion-range (ionChange)="estimateCalc()" [(ngModel)]="loanDuration" min="0" max="120" pin color="secondary">
+                        <ion-label slot="end">{{ loanDuration | number}}</ion-label>
+                    </ion-range>
+
+                <ion-label>Loan Interest</ion-label>
+                <ion-range (ionChange)="estimateCalc()" [(ngModel)]="loanInterest" min="0" max="20" pin color="tertiary">
+                    <ion-label slot="end">{{ loanInterest | number}}</ion-label>
+                </ion-range>
+
+                <ion-item>
+
+                    <!--<ion-radio-group>
+                        <ion-item>
+                            <ion-grid>
+                                <ion-row>
+                                    <ion-col size="6">
+                                        <ion-label class="ion-text-wrap">Flat Rate</ion-label>
+                                        <ion-radio value="flat_rate"></ion-radio>
+                                    </ion-col>
+                                    <ion-col size="6">
+                                        <ion-label class="ion-text-wrap">Reducing Balance</ion-label>
+                                        <ion-radio value="reducing_rate"></ion-radio>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+
+
+
+                        </ion-item>
+
+                    </ion-radio-group>-->
+
+                    <ion-label class="ion-text-wrap" position="stacked">Interest Method?</ion-label>
+                    <ion-select (ionChange)="estimateCalc()" [(ngModel)]="loanMethod" okText="Okay" cancelText="Dismiss">
+                        <ion-select-option value="flat_rate" selected>Flat Rate</ion-select-option>
+                        <ion-select-option value="reducing_rate">Reducing Balance</ion-select-option>
+
+                    </ion-select>
+                </ion-item>
+            </ion-card>
+            <ion-card id="estimateTable">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>#</th>
+
+                        <th>Opening Balance</th>
+                        <th>Interest Payable</th>
+                        <th>Principal Payable</th>
+                        <th>Loan Installment</th>
+                        <th>Closing Bal</th>
+                        <th>Total Paid</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let repaymentCycle of estimateSchedule">
+
+                        <td>{{ repaymentCycle.number}}</td>
+
+                        <td>{{ repaymentCycle.openingbal | number:'1.0-0'}}</td>
+                        <td>{{ repaymentCycle.intpayable | number:'1.0-0'}}</td>
+                        <td>{{ repaymentCycle.prinpayable | number:'1.0-0'}}</td>
+                        <td>{{ repaymentCycle.installmentamount | number:'1.0-0'}}</td>
+                        <td>{{ repaymentCycle.closingbal | number:'1.0-0' }}</td>
+                        <td>{{ repaymentCycle.totalpaid | number:'1.0-0' }}</td>
+
+                    </tr>
+                    </tbody>
+
+                </table>
+            </ion-card>
+
+        </div>
+
+    </div>
+
+
+</ion-content>
+

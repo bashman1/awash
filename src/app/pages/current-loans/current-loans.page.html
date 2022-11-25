@@ -1,0 +1,58 @@
+<ion-header>
+    <ion-toolbar class="top-header">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Active Loans</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <div *ngFor="let loan of loansList">
+        <ion-card>
+            <ion-card-header>
+                <!-- #2a3998;  #1f81c5-->
+                <ion-card-title style="color: #2a3998;">{{loan.name}}</ion-card-title> 
+            </ion-card-header>
+            <ion-card-content>
+      
+
+                <table class="table">
+                    <tr>
+                        <th>Loan No.</th>
+                        <td>{{loan.acct_no}}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{loan.loan_description}}</td>
+                    </tr>
+                    <tr>
+                        <th>Principal Amount</th>
+                        <td>{{loan.principal_amount | number:'1.0-0'}}</td>
+                    </tr>
+                    <tr>
+                        <th>Loan Status</th>
+                        <td>{{loan.loan_status}}</td>
+                    </tr>
+                    <tr>
+                        <th>Interest Rate</th>
+                        <td>{{loan.interest_rate}}</td>
+                    </tr>
+                </table>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col><ion-button (click)="loanDetails(loan)" expand="block" class="top-header">Loan Details</ion-button></ion-col>
+                        <ion-col><ion-button (click)="savingAccounts(loan)" expand="block" class="top-header">Pay Loan</ion-button></ion-col>
+                    </ion-row>
+                </ion-grid>
+                
+            </ion-card-content>
+
+        </ion-card>
+    </div>
+    <div *ngIf="!emptycheck" class="emptyMessage">
+        {{ emptyMessage }}
+    </div>
+
+</ion-content>

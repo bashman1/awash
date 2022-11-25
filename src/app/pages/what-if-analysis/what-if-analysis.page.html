@@ -1,0 +1,205 @@
+<ion-header>
+  <ion-toolbar class="top-header">
+    <ion-buttons slot="start">
+      <ion-back-button (click)="portrait()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>What If Analysis</ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content>
+
+
+  <ion-card [ngStyle]="{'display':form}">
+    <ion-card-content>
+      <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
+      <!-- <ion-card-title>Self Appraisal</ion-card-title> -->
+      <form [formGroup]="selfAppraisalForm" (ngSubmit)="selfAppraise()">
+        <ion-item>
+          <ion-label position="floating">Principal Amount</ion-label>
+          <ion-input (ionChange)="commas()" type="text"  pattern="^[\d,]+$" formControlName="loan_principal"></ion-input>
+
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.loan_principal">
+              <div class="error-message"
+                *ngIf="selfAppraisalForm.get('loan_principal').hasError(validation.type) && (selfAppraisalForm.get('loan_principal').dirty || selfAppraisalForm.get('loan_principal').touched)">
+                {{ validation.message}}
+              </div>
+            </ng-container>
+          </div>
+
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Interest Rate(Per Annum)</ion-label>
+          <ion-input type="number" formControlName="interest_amount"></ion-input>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.interest_amount">
+              <div class="error-message"
+                *ngIf="selfAppraisalForm.get('interest_amount').hasError(validation.type) && (selfAppraisalForm.get('interest_amount').dirty || selfAppraisalForm.get('interest_amount').touched)">
+                {{ validation.message}}
+              </div>
+            </ng-container>
+          </div>
+        </ion-item>
+
+ 
+
+        <ion-item>
+          <ion-label>Interest Method</ion-label>
+          <ion-select
+          [interfaceOptions]="customActionSheetOptions" interface="popover"
+            formControlName="interest_method"
+          >
+            <ion-select-option value="flat_rate">Flat Rate</ion-select-option>
+            <ion-select-option value="reducing_rate"
+              >Reducing Balance</ion-select-option
+            >
+          </ion-select>
+
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.interest_method">
+              <div class="error-message"
+                *ngIf="selfAppraisalForm.get('interest_method').hasError(validation.type) && (selfAppraisalForm.get('interest_method').dirty || selfAppraisalForm.get('interest_method').touched)">
+                {{ validation.message}}
+              </div>
+            </ng-container>
+          </div>
+          
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Loan Duration</ion-label>
+          <ion-input type="number" formControlName="loan_duration"></ion-input>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.loan_duration">
+              <div class="error-message"
+                *ngIf="selfAppraisalForm.get('loan_duration').hasError(validation.type) && (selfAppraisalForm.get('loan_duration').dirty || selfAppraisalForm.get('loan_duration').touched)">
+                {{ validation.message}}
+              </div>
+            </ng-container>
+          </div>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Loan Duration Unit</ion-label>
+          <ion-select
+            
+          [interfaceOptions]="customActionSheetOptions" interface="popover"
+            formControlName="duration_in"
+            (ionChange)="loanDurationChange($event.target.value)"
+          >
+            <ion-select-option value="Day(s)">Day(s)</ion-select-option>
+            <ion-select-option value="Week(s)">Week(s)</ion-select-option>
+            <ion-select-option value="Month(s)">Month(s)</ion-select-option>
+            <ion-select-option value="Year(s)">Year(s)</ion-select-option>
+          </ion-select>
+
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.duration_in">
+              <div class="error-message"
+                *ngIf="selfAppraisalForm.get('duration_in').hasError(validation.type) && (selfAppraisalForm.get('duration_in').dirty || selfAppraisalForm.get('duration_in').touched)">
+                {{ validation.message}}
+              </div>
+            </ng-container>
+          </div>
+
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Repayment Frequency Value</ion-label>
+          <ion-input type="number"  formControlName="repayment_freq_value"></ion-input>
+
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.repayment_freq_value">
+              <div class="error-message"
+                *ngIf="selfAppraisalForm.get('repayment_freq_value').hasError(validation.type) && (selfAppraisalForm.get('repayment_freq_value').dirty || selfAppraisalForm.get('repayment_freq_value').touched)">
+                {{ validation.message}}
+              </div>
+            </ng-container>
+          </div>
+          <div *ngIf="maxvalue" class="validation-errors">{{ maxErrorMessage }}</div>
+
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Repayment Freq Code</ion-label>
+          <ion-select
+            
+          [interfaceOptions]="customActionSheetOptions" interface="popover"
+            formControlName="repayment_freq"
+          >
+            <ion-select-option *ngFor="let time of filteredDurationUnits" value="{{time.time}}">{{time.time}}</ion-select-option>
+
+
+            
+            <!-- <ion-select-option value="Day(s)">Day(s)</ion-select-option>
+            <ion-select-option value="Week(s)">Week(s)</ion-select-option>
+            <ion-select-option value="Month(s)">Month(s)</ion-select-option>
+            <ion-select-option value="Year(s)">Year(s)</ion-select-option> -->
+          </ion-select>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.repayment_freq">
+              <div class="error-message"
+                *ngIf="selfAppraisalForm.get('repayment_freq').hasError(validation.type) && (selfAppraisalForm.get('repayment_freq').dirty || selfAppraisalForm.get('repayment_freq').touched)">
+                {{ validation.message}}
+              </div>
+            </ng-container>
+          </div>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Grace Period</ion-label>
+          <ion-input type="number" formControlName="grace_period"></ion-input>
+        </ion-item>
+        <ion-button type="submit" expand="block">Generate Schedule</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+
+
+  <ion-card *ngFor="let item of repaymentSchedule">
+    <ion-card-header>
+      <ion-card-subtitle> Repayment: {{ item.number }} </ion-card-subtitle>
+      <!-- <ion-card-title>Card Title</ion-card-title> -->
+    </ion-card-header>
+    <ion-card-content>
+
+      <table style="width: 100%; border: 1px solid #000; ">
+        <!-- <tr>
+          <th>#</th>
+          <td>{{ item.number }}</td>
+        </tr> -->
+        <!-- <tr>
+          <th>Start Date</th>
+          <td>{{ item.startDate |date :  'dd-MM-yyyy'  }}</td>
+        </tr> -->
+        <tr>
+          <th>Opening Balance</th>
+          <td ><span class="opening">{{ item.openingbal | number:'1.0-0' }}</span></td>
+        </tr>
+        <tr>
+          <th>Interest</th>
+          <td>{{ item.intpayable | number:'1.0-0' }}</td>
+        </tr>  
+        <tr>
+          <th>Principal</th>
+          <td>{{ item.prinpayable | number:'1.0-0' }}</td>
+        </tr>
+        <tr>
+          <th>Installment</th>
+          <td>{{ item.installmentamount | number:'1.0-0' }}</td>
+        </tr>
+        <tr>
+          <th>Closing Bal</th>
+          <td ><span class="closing">{{ item.closingbal | number:'1.0-0' }}</span></td>
+        </tr>
+        <tr>
+          <th>Total</th>
+          <td ><span class="total">{{ item.totalpaid | number:'1.0-0'}}</span></td>
+        </tr>
+      </table>
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>

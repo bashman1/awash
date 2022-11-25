@@ -1,0 +1,274 @@
+<ion-header>
+  <ion-toolbar class="top-header">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="credit-card">
+      <ion-grid class="genInfo">
+        
+        <ion-row class="name">
+          {{ name }}
+        </ion-row>
+        <ion-row class="card-row">
+          <ion-col class="chip">
+            <img src="assets/img/chip.png">
+          </ion-col>
+          <ion-col class="custNo">
+            {{ custNo }}
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="institutionType !== 2" class="card-row">
+          <ion-col class="label">
+            Loan Balance
+          </ion-col>
+          <ion-col class="custNo">{{currency}} {{totalBalance | number:'1.0-0'}}</ion-col>
+        </ion-row>
+      </ion-grid>  
+
+  </div>
+  <!-- <div *ngIf="acctBalanceList.length > 0 && institutionType !== 2">
+    <h4>Saving Products</h4>
+  <ion-slides style="margin-top:2%; margin-bottom: 2%;" [options]="option">
+    <ion-slide class="ion-text-left" *ngFor="let bal of acctBalanceList">
+      <div class="ion-padding card_slide">
+        <div>
+          <ion-row class="product">{{bal.displayName}}</ion-row>
+        <ion-row class="product">{{bal.crncy_cd}} {{bal.balance | number:'1.0-0'}}</ion-row>
+        </div>
+      </div>
+    </ion-slide>
+    
+  </ion-slides>
+  </div> -->
+
+  <div >
+    <h4>Loans</h4>
+    <ion-grid>
+      <ion-row class="row">
+        <ion-col>
+          <ion-card (click)=" loanApplication()" class="new_style" size="6">
+            <div class="icon-container">
+              <ion-icon class="myicon" name="add"></ion-icon>
+            </div>
+            <div class="label-container">
+              Apply
+            </div>
+            
+        </ion-card> 
+        </ion-col>
+        <ion-col>
+          <ion-card (click)="currentLoans()" class="new_style" size="6">
+            <div class="icon-container">
+              <ion-icon class="myicon" name="wallet"></ion-icon>
+            </div>
+            <div class="label-container">
+              Active Loans
+            </div>
+           
+        </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card (click)="loanApraisal()" class="new_style" size="6">
+            <div class="icon-container">
+              <ion-icon class="myicon" name="analytics"></ion-icon>
+            </div>
+            <div class="label-container">
+              Loan Calculator
+            </div>              
+        </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  <!-- <ion-slides style="margin-top:2%; margin-bottom: 2%;" [options]="option">
+    <ion-slide class="ion-text-left" *ngFor="let bal of loanList">
+      <div class="ion-padding card_slide">
+        <div>
+          <ion-row class="product">{{bal.product_name}}</ion-row>
+        <ion-row class="product">{{currency}} {{bal.principal_amount | number:'1.0-0'}}</ion-row>
+        </div>
+      </div>
+    </ion-slide>
+    
+  </ion-slides> -->
+  </div>
+  
+  <div *ngIf="transactionLists.length > 0" class="ion-padding-horizontal">
+    <ion-row style="height: 40px;">
+      <ion-col size="8">
+        <h4>{{transactionLabel}}</h4>
+      </ion-col>
+      <ion-col size="4" class="ion-text-right">
+        <ion-button (click)="transHistory()" fill="clear" color="dark">
+          <ion-icon slot="icon-only" name="ellipsis-horizontal"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <div *ngFor="let transaction of transactionLists" class="ion-padding transactions">
+      <div>
+        <ion-row style="height: 100%; margin-top: -3%;" class="ion-align-items-center">
+          <ion-col size="1">
+            <div class="cover">
+              <ion-icon slot="icon-only" name="wallet-outline"></ion-icon>
+              <!-- <img src="assets/f2.png"> -->
+            </div>
+          </ion-col>
+          <ion-col size="7">
+            <div *ngIf="institutionType !== 2">{{transaction.acct_type}}</div>
+            <div>{{transaction.tran_dt}}</div>
+          </ion-col>
+          <ion-col size="4" class="ion-text-left">
+            {{currency}} {{transaction.tran_amt}}
+            <!-- <ion-button color="dark" mode="ios">
+              <ion-icon slot="icon-only" name="add"></ion-icon>
+            </ion-button> -->
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+    </div>
+
+  <div>
+   
+    <!-- <ion-card class="main-card">
+      <ion-card-header>
+        <div *ngFor="let bal of acctBalanceList">
+        <ion-card-subtitle class="resize">
+          <ion-row>
+            <ion-col size="6">{{ bal.displayName}}</ion-col>
+            <ion-col  size="6" class="float-right">{{bal.crncy_cd}} {{bal.balance | number:'1.0-0'}}</ion-col>
+          </ion-row>
+          </ion-card-subtitle>
+      </div>
+        <hr />
+      </ion-card-header>
+
+      <ion-card-content>
+        <div *ngFor="let tran of lastTransation">
+        <ion-grid>
+          <ion-row >
+            <ion-col size="6">
+              Last Transaction
+            </ion-col>
+            <ion-col size="6" class="float-right">
+             {{ tran.create_dt | date :  'EEE dd MMM yyyy HH:mm:ss'}}
+            </ion-col>
+            <ion-col size="6" *ngIf="tran.tran_code == 'DP'" class="resize">
+              Deposit
+            </ion-col>
+            <ion-col size="6" *ngIf="tran.tran_code == 'WD'" class="resize">
+              Withdraw
+            </ion-col>
+            <ion-col size="6" class="float-right resize">
+              <span class="acct-balance">{{ tran.tran_amt | number:'1.0-0'}}</span> 
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-button (click)="transHistory()" expand="block">Transaction Statements</ion-button>
+      </div>
+      </ion-card-content>
+    </ion-card> -->
+  </div>
+
+
+  <div>
+    <ion-grid>
+      <ion-row>
+        <!-- <ion-col size="6"> 
+          <ion-card>
+            <ion-card-header class="card-head">
+              
+              <ion-card-title>Savings</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p>Mandatory Savings Account.</p>
+              <p>UGX 25,000</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col> -->
+  
+        <!-- <ion-col size="6"> 
+          <ion-card (click)="goToLoans()">
+            <ion-card-header class="card-head">
+             
+              <ion-card-title>Loans</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p>Running Loan.</p>
+              <p>{{currency}}: {{ loansStatics.principle | number:'1.0-0'}}</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col> -->
+  
+      </ion-row>
+    </ion-grid>
+  
+  </div>
+
+  <div>
+      <!-- <ion-card>
+        <ion-card-header>
+          Transactions 
+        </ion-card-header>
+        <ion-card-content>
+          <canvas #lineCanvas></canvas>
+        </ion-card-content>
+      </ion-card> -->
+
+      <!-- <ion-card>
+          <ion-card-header>
+            Savings/Loans
+          </ion-card-header>
+          <ion-card-content>
+            <canvas #doughnutCanvas></canvas>
+          </ion-card-content>
+        </ion-card> -->
+    </div>
+
+
+
+<!-- 
+    <div class="top-main">
+      <ion-avatar class="menu-img">
+        <ion-img src="../../assets/img/user.jfif"></ion-img>
+        
+      </ion-avatar>
+    </div> -->
+    <!-- <div class="bottom-main">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            <ion-card>
+              <span class="amt">29,000</span>
+              <ion-card-title>Account Balance</ion-card-title>
+            </ion-card>
+          </ion-col>
+          <ion-col size="6">
+            <ion-card>
+              <span class="amt">10,000</span>
+              <ion-card-title>Last Transaction</ion-card-title>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <ion-card>
+              <span class="amt">10,000</span>
+            </ion-card>
+          </ion-col>
+          <ion-col size="6">
+            <ion-card>
+              <span class="amt">10,000</span>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-button (click)="transHistory()" expand="block">Transaction Statements</ion-button>
+    </div> -->
+
+ 
+</ion-content>

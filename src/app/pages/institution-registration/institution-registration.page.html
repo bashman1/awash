@@ -1,0 +1,261 @@
+
+
+<ion-content>
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Register Institution</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    
+       <form [formGroup] = 'institutionForm' (ngSubmit)= 'submit()'>
+        <mat-vertical-stepper formArrayName="generalInformation" linear="true" #stepper>
+          <mat-step formGroupName="0" [stepControl]="basicForm.controls['0']">
+            
+              <ng-template matStepLabel>General Information</ng-template>
+
+              <div class="row">
+                <div class="col-sm-10">
+                  <mat-form-field>
+                    <mat-label>Institution Name</mat-label>
+                    <input (blur)="logValidationErrors();" matInput placeholder="Enter Institution Name" formControlName="institutionName" required>
+                    <mat-error *ngIf="formErrors.institutionName">{{ formErrors.institutionName }}</mat-error>
+
+                  </mat-form-field>
+                </div>
+                      
+              <div class="col-sm-10"> 
+                <mat-form-field>
+                  <mat-select formControlName="institutionTypeId" placeholder="Search institution type" required>
+                    <ngx-mat-select-search [formControl]="institutionTypes"></ngx-mat-select-search>
+                    <mat-option >--Institution--</mat-option>
+                    <mat-option *ngFor="let type of filteredInstitutionTypes" [value]="type.id">{{type.institutionTypeName}}</mat-option>
+
+                  </mat-select>
+                </mat-form-field>
+
+              </div>
+              
+              <div class="col-sm-10">
+                <mat-radio-group (change)="getSubCat($event.value)" formControlName ='industryType' required>
+                  <mat-label>Industry Type *: </mat-label>
+                  <mat-radio-button class="person-radio-button" *ngFor="let type of industryList; let i = index" [value]="type.industryCode">{{ type.description }}</mat-radio-button>
+                </mat-radio-group>
+              </div>
+
+              <div class="col-sm-10">
+                <mat-radio-group formControlName='industrySubCat' required>
+                  <mat-label>Industry Sub-category *:</mat-label>
+                  <mat-radio-button *ngFor="let subCat of selectedIndustrySubCat; let i = index" [value]="subCat.id">{{ subCat.industrySubName }}</mat-radio-button>
+                </mat-radio-group>
+              </div>
+                  
+            </div>
+
+            <div class="col-sm-10">
+              <mat-radio-group (change)="check($event.value)" formControlName='selfReg' required>
+                  <mat-label>Enable Member Self Registration *:</mat-label>
+                  <mat-radio-button [value]=true>Yes</mat-radio-button>
+                  <mat-radio-button [value]=false>No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+
+            <div id="approve_self_reg" style="display: none" class="col-sm-10">
+              <mat-label>Enable Member Self Registration Approval</mat-label>
+              <mat-radio-group formControlName="selfRegApproval" aria-label="Enable Member Self Registration Approval">
+                <mat-radio-button [value]=true>Yes</mat-radio-button>
+                <mat-radio-button [value]=false>No</mat-radio-button>
+              </mat-radio-group>
+            </div>
+
+            <ion-item-divider>
+              <ion-label>
+                Address Information
+              </ion-label>
+            </ion-item-divider>
+
+            <div formGroupName = 'addressInformation'>
+
+              <div class="col-sm-10">
+                <mat-radio-group (change)="getDistrict($event.value)" formControlName='region' required>
+                  <mat-label>Region *: </mat-label>
+                  <mat-radio-button *ngFor="let region of regions; let i = index" [value]='region.id'>{{ region.name }}</mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <div class="col-sm-10">
+                <mat-form-field>
+                  <mat-label>Select an district</mat-label>
+                  <mat-select (openedChange)="logValidationErrors();" (selectionChange)="getCounty($event.value)" formControlName='district' required>
+                    <mat-option *ngFor="let district of districtList" [value]="district.id">{{ district.districtName }}</mat-option>                    
+                  </mat-select>
+                  <mat-error *ngIf="formErrors.district">{{ formErrors.district }}</mat-error>
+
+                </mat-form-field>
+              </div>
+
+              <div class="col-sm-10">
+                <mat-form-field>
+                  <mat-label>Select an county</mat-label>
+                  <mat-select (openedChange)="logValidationErrors();" (selectionChange)="getSubCounty($event.value)" formControlName='county' required>
+                    <mat-option *ngFor="let county of countyList" [value]="county.id">{{ county.countyName}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-error *ngIf="formErrors.county">{{ formErrors.county }}</mat-error>
+
+              </div>
+
+              <div class="col-sm-10">
+                <mat-form-field>
+                  <mat-label>Select an subcounty</mat-label>
+                  <mat-select (openedChange)="logValidationErrors();" (selectionChange)="getParish($event.value)" formControlName='subcounty' required>
+                    <mat-option *ngFor="let subcounty of subcountyList" [value]="subcounty.id">{{ subcounty.subCountyName}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-error *ngIf="formErrors.subcounty">{{ formErrors.subcounty }}</mat-error>
+
+              </div>
+
+              <div class="col-sm-10">
+                <mat-form-field>
+                  <mat-label>Select an Parish</mat-label>
+                  <mat-select (openedChange)="logValidationErrors();" formControlName='parish' required>
+                    <mat-option *ngFor="let parish of parishList" [value]="parish.id">{{parish.parishName}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="formErrors.parish">{{ formErrors.parish }}</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-sm-10">
+                <mat-form-field>
+                   <mat-label>Village </mat-label>
+                   <input (blur)="logValidationErrors();" matInput placeholder="Enter Village" formControlName="village" required>
+                   <mat-error *ngIf="formErrors.village">{{ formErrors.village }}</mat-error>
+                </mat-form-field>
+              </div>
+
+            </div>
+
+              <div>
+                <button class="submit" type="button" mat-button matStepperNext>Next</button>
+              </div>
+           
+          </mat-step>
+          <mat-step formGroupName="1" [stepControl]="basicForm.controls['1']">
+            
+              <ng-template matStepLabel>Bank Information</ng-template>
+
+              <div class="row">
+
+                <div class="col-sm-10">
+                  <mat-form-field>
+                    <mat-select formControlName="banksId" placeholder="Search bank" required>
+                      <ngx-mat-select-search [formControl]="banks"></ngx-mat-select-search>
+                      <mat-option >--Banks--</mat-option>
+                      <mat-option *ngFor="let bank of filteredBanks" [value]="bank">{{ bank.name }}</mat-option>
+  
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-10">
+                  <mat-form-field>
+                    <mat-label>Account Name</mat-label>
+                    <input (blur)="logValidationErrors();" matInput formControlName="accountName" required>
+                    <mat-error *ngIf="formErrors.accountName">{{ formErrors.accountName }}</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-10">
+                  <mat-form-field>
+                    <mat-label>Account Type</mat-label>
+                    <input (blur)="logValidationErrors();" matInput formControlName="accountType" required>
+                    <mat-error *ngIf="formErrors.accountType">{{ formErrors.accountType }}</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-10">
+                  <mat-form-field>
+                    <mat-label>Account Number</mat-label>
+                    <input (blur)="logValidationErrors();" type='number' matInput formControlName="accountNumber" required>
+                    <mat-error *ngIf="formErrors.accountNumber">{{ formErrors.accountNumber }}</mat-error>
+                  </mat-form-field>
+                </div>
+
+            </div>
+              <div class="row">
+                <button class="back col-sm-12" type="button" mat-button matStepperPrevious>Back</button>
+                <hr />
+                <button class="submit col-sm-12" type="button" mat-button matStepperNext>Next</button>
+              </div>
+            
+          </mat-step>
+          <mat-step formGroupName="2" [stepControl]="basicForm.controls['2']">
+            
+            <ng-template matStepLabel>Contact Details</ng-template>
+             
+            <div class="row">
+
+            
+
+              <div class="col-sm-10">
+                <mat-form-field>
+                  <mat-label>Contact Person</mat-label>
+                  <input (blur)="logValidationErrors();" matInput formControlName = 'contactPerson' [value]='' required>
+                  <mat-error *ngIf="formErrors.contactPerson">{{ formErrors.contactPerson }}</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-sm-10">
+                <mat-form-field>
+                  <mat-label>Position</mat-label>
+                  <input (blur)="logValidationErrors();" matInput formControlName = 'position' required>
+                  <mat-error *ngIf="formErrors.position">{{ formErrors.position }}</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-sm-10">
+                <mat-form-field>
+                  <mat-label>Email</mat-label>
+                  <input (blur)="logValidationErrors();" matInput formControlName = 'email' [value]='' type="email" required>
+                  <mat-error *ngIf="formErrors.email">{{ formErrors.email }}</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-sm-10">
+                <mat-form-field>
+                  <mat-label>Country Code</mat-label>
+                  <mat-select (openedChange)="logValidationErrors();" formControlName='contactCode' required>
+                    <mat-option *ngFor="let code of countryRefData" [value]="code.dialingCode">{{code.dialingCode}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="formErrors.contactCode">{{ formErrors.contactCode }}</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-sm-10">
+                <mat-form-field>
+                  <mat-label>Phone Number</mat-label>
+                  <input placeholder="779658454" (blur)="logValidationErrors();" matInput formControlName = 'phoneNumber' type="tel" required>
+                  <mat-error *ngIf="formErrors.phoneNumber">{{ formErrors.phoneNumber }}</mat-error>
+                </mat-form-field>
+              </div>
+
+            </div>
+    
+            <div class="row">
+              <button class="back col-sm-12" type="button" mat-button matStepperPrevious>Back</button>
+              <hr />
+              <button [disabled] = 'success' class="submit col-sm-12" type="submit" mat-button matStepperNext>Create My Institution</button>
+            </div> 
+           
+          
+        </mat-step>
+        </mat-vertical-stepper>
+        
+            
+     
+    </form>
+
+  </ion-card-content>
+
+</ion-card>
+</ion-content>

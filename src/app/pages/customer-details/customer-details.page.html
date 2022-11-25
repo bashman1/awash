@@ -1,0 +1,202 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+      </ion-buttons>
+    <ion-title>Member Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card id="inquiry">
+    <h6>If the member exists select the yes option and search for the member. If the member doesn't exist , select the No option and proceed to fill in the form </h6>
+    <hr/>
+    <ion-radio-group (ionChange)="customerInquiry($event)">
+
+      <ion-label color="success">Yes</ion-label>
+      <ion-radio slot="start" value="true"></ion-radio>
+
+      <ion-label color="warning">No</ion-label>
+      <ion-radio slot="start" value="false"></ion-radio>
+    </ion-radio-group>
+  </ion-card>
+
+  <ion-card id="customerDetails">
+    <form [formGroup]="customerInformation" (ngSubmit)="submit()">
+
+      <ion-grid class="contact">
+        <ion-row>
+          <ion-col size="12">
+            <mat-form-field class="demo-full-width">
+              <mat-select (openedChange)="logValidationErrors();" formControlName="title" placeholder="Title">
+                <mat-option [value]="title_s.id" *ngFor="let title_s of userTitle">{{title_s.description}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <mat-form-field>
+              <mat-label>First Name</mat-label>
+              <input (blur)="logValidationErrors();" matInput placeholder="Enter First Name" formControlName="firstName" required>
+              <mat-error *ngIf="formErrors.firstName">{{ formErrors.firstName }}</mat-error>
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <mat-form-field>
+              <mat-label>Last Name</mat-label>
+              <input (blur)="logValidationErrors();" matInput placeholder="Enter Last Name" formControlName="lastName" required>
+              <mat-error *ngIf="formErrors.lastName">{{ formErrors.lastName }}</mat-error>
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <mat-form-field>
+              <mat-label>Middle Name</mat-label>
+              <input (blur)="logValidationErrors();" matInput placeholder="Enter Middle Name" formControlName="middleName">
+              <mat-error *ngIf="formErrors.middleName">{{ formErrors.middleName }}</mat-error>
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <mat-radio-group formControlName='gender' required>
+              <mat-label>Gender *:</mat-label>
+              <mat-radio-button value="Female">Female</mat-radio-button>
+              <mat-radio-button value="Male">Male</mat-radio-button>
+            </mat-radio-group>
+          </ion-col>
+        </ion-row>
+        
+        <ion-row>
+          <ion-col size="12">
+            <mat-form-field class="demo-full-width">
+              <mat-select (openedChange)="logValidationErrors();" formControlName="maritalstatus" placeholder="Marital Status">
+                <mat-option *ngFor="let status of maritalStatus" [value]="status.id">{{status.description}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <mat-form-field class="example-full-width">
+              <mat-label>Date of Birth</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="dob" [max]="today">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker touchUi #picker></mat-datepicker>
+            </mat-form-field>            
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="4">
+            <mat-form-field class="demo-full-width">
+              <mat-select (openedChange)="logValidationErrors();" (selectionChange)="phoneNumberVerification()" formControlName="contactCode" placeholder="Code">
+                <mat-option *ngFor="let country of countryRefData" [value]="country.dialingCode">{{country.dialingCode}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ion-col>
+          <ion-col size="8">
+            <mat-form-field class="example-full-width">
+              <mat-label>Primary Phone Number</mat-label>
+              <input (blur)="logValidationErrors();" (keyup)="phoneNumberVerification()" formControlName="phoneNumber" matInput placeholder="Eg. 773655879 or 701324895" type="tel">
+              <mat-error *ngIf="formErrors.phoneNumber">{{ formErrors.phoneNumber }}</mat-error>
+            </mat-form-field>
+        </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="4">
+            <mat-form-field class="demo-full-width">
+              <mat-select (openedChange)="logValidationErrors();" (selectionChange)="otherPhoneNumberVerification()" formControlName="otherContactCode" placeholder="Code">
+                <mat-option *ngFor="let country of countryRefData" [value]="country.dialingCode">{{country.dialingCode}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ion-col>
+          <ion-col size="8">
+            <mat-form-field class="example-full-width">
+              <mat-label>Other Phone Number</mat-label>
+              <input (blur)="logValidationErrors();" (keyup)="otherPhoneNumberVerification()" formControlName="otherPhoneNumber" matInput placeholder="Eg. 773655879 or 701324895" type="tel">
+              <mat-error *ngIf="formErrors.otherPhoneNumber">{{ formErrors.otherPhoneNumber }}</mat-error>
+            </mat-form-field>
+        </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <mat-form-field>
+              <mat-label>Address</mat-label>
+              <input (blur)="logValidationErrors();" matInput placeholder="Enter Your address" formControlName="address" required>
+              <mat-error *ngIf="formErrors.address">{{ formErrors.address }}</mat-error>
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <mat-form-field>
+              <mat-label>Dependants</mat-label>
+              <input type="number" (blur)="logValidationErrors();" matInput placeholder="Number of dependants" formControlName="dependants">
+              <mat-error *ngIf="formErrors.dependants">{{ formErrors.dependants }}</mat-error>
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+        
+      </ion-grid>
+
+      <ion-button>Back</ion-button>
+      <ion-button type="submit">Next</ion-button>
+
+    </form>
+
+  </ion-card>
+
+  <ion-card id="customerSearch">
+    <form (ngSubmit)="searchCustomer()" [formGroup]="searchCriteria">
+
+      <ion-item>
+        <ion-select (ionChange)="change($event)" formControlName="searchCriterias" placeholder="Select Search Criteria" multiple>
+          <ion-select-option [value]="obj.val" *ngFor="let obj of searchObject">{{obj.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item style="display: none" id="refNo">
+        <ion-label class="ion-text-wrap" position="stacked">Enter Reference No.</ion-label>
+        <ion-input formControlName="refNo" type="text"></ion-input>
+
+      </ion-item>
+
+      <ion-item style="display: none" id="LName">
+        <ion-label class="ion-text-wrap" position="stacked">Enter Member Name</ion-label>
+        <ion-input formControlName="LName" type="text"></ion-input>
+
+      </ion-item>
+
+      <ion-card (click)="selectedCustomer(cust)" *ngFor="let cust of customer">
+        <ion-grid>
+          <ion-row>
+            <ion-col>Member No.</ion-col>
+            <ion-col>{{cust.cust_no}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>Name.</ion-col>
+            <ion-col>{{cust.first_name}} {{cust.last_name}}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+
+      <ion-button type="submit">Submit</ion-button>
+
+
+    </form>
+  </ion-card>
+
+</ion-content>

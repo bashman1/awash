@@ -1,0 +1,41 @@
+.row {
+    height: 30vh;
+    // margin-left: -10%;
+    
+}
+.new_style {
+    // background-color: aqua;
+    height: 10vh;
+    width: 90%;
+    display: inline-block;
+    flex-direction: row;
+    justify-content: center;
+    // margin: 50%;
+    align-items: center;
+    
+    // overflow: auto;
+}
+
+.icon-container{
+    border-radius: 8px;
+    border-color: red;
+    border-width: 4px;
+    // background-color: indigo;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    margin-top: 3%;
+}
+
+.label-container{
+    display: flex;
+    justify-content: center;
+    overflow-wrap: break-word; 
+    text-align: center;
+    // background-color: greenyellow;
+}
+
+ion-icon {
+    font-size: 24px; 
+    color:#2a3998;
+  }

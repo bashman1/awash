@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/menu/landing"></ion-back-button>
+        </ion-buttons>
+    <ion-title>Stock Valuation</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content scrollX="true">
+
+  <table>
+    <thead>
+
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Cost</th>
+        <th>Sales</th>
+        <th>Margin</th>
+        <th>Stock</th>
+        
+      </tr>
+
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of product">
+
+        <td>{{item.productName}}</td>
+        <td>{{item.quantity}}</td>
+        <td>{{item.cost | number : '1.0'}}</td>
+        <td>{{item.price | number : '1.0'}}</td>
+        <td>{{item.margin.toFixed(2)}}</td>
+        <td>{{item.stock | number : '1.0'}}</td>
+
+      </tr>
+    </tbody>
+  </table>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+   <ion-fab-button (click)="addStocks()">
+     <ion-icon name="add"></ion-icon>
+   </ion-fab-button>
+ </ion-fab>
+</ion-content>
+<ion-button (click)="redirect()" color="primary" fill="solid"><ion-icon slot="end" name="arrow-forward"></ion-icon>Next</ion-button>
+

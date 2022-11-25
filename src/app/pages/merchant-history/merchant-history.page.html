@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar class="top-header">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Services History</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+
+
+
+
+  <div *ngIf="showData">
+  <ion-card  *ngFor="let result of resultsList">
+    <table class="table">
+      <tr class="row">
+        <th class="float-left">Amount Paid</th>
+        <td class="float-right">{{result.amount_paid | number:'1.0-0'}}</td>
+      </tr>
+      <!-- <tr class="row" *ngIf="result.no_of_dependents > 0 && result.is_top_reference">
+        <th class="float-left">Price</th>
+        <td class="float-right">{{(result.expected_amount-(result.no_of_dependents * result.cost_per_dependent))| number:'1.0-0'}}</td>
+      </tr> -->
+      <!-- <span > -->
+      <tr class="row" *ngIf="result.no_of_dependents > 0 ">
+        <th class="float-left">No. of dependents</th>
+        <td class="float-right">{{result.no_of_dependents | number:'1.0-0'}}</td>
+      </tr>
+      <!-- <tr class="row" *ngIf="result.no_of_dependents > 0 && result.is_top_reference">
+        <th class="float-left">Total Cost (Dependents)</th>
+        <td class="float-right">{{(result.cost_per_dependent) | number:'1.0-0'}}</td>
+      </tr> -->
+      <tr class="row" >
+        <th class="float-left">Amount To Pay</th>
+        <td class="float-right">{{ result.expected_amount | number:'1.0-0'}}</td>
+      </tr>
+    <!-- </span> -->
+      <tr class="row">
+        <th class="float-left">Date</th>
+        <td class="float-right">{{result.created_on | date :  'EEE dd MMM yyyy HH:mm:ss'}}</td>
+      </tr>
+      <tr class="row">
+        <th class="float-left">Service Provider</th>
+        <td class="float-right">{{result.merchant_name}}</td>
+      </tr>
+      <tr class="row">
+        <th class="float-left">Package</th>
+        <td class="float-right">{{result.package_name}}</td>
+      </tr>
+      <tr class="row">
+        <th class="float-left">Payment No.</th>
+        <td class="float-right">{{result.payment_reference}}</td>
+      </tr>
+      <tr class="row">
+        <th class="float-left">Payment Status</th>
+        <td class="float-right">{{result.payment_status}}</td>
+      </tr>
+      <tr class="row">
+        <th class="float-left">Subscription</th>
+        <td class="float-right">{{result.subscription_status}}</td>
+      </tr>
+
+  
+    </table>
+    <div *ngIf="result.cost_per_dependent  && !result.is_top_reference">
+      <ion-button expand="block" fill="clear" (click)="payForDependant(result)" >Pay for dependents</ion-button>
+    </div>
+
+  </ion-card>
+</div>
+  <div *ngIf="!showData" class="emptyMessage">
+    {{ 'No Records Found' }}
+  </div>
+
+</ion-content>

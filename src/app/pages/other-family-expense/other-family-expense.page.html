@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Other Family Expense</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+  <ion-item>
+    <ion-input formControlName="name" placeholder="Expense Name" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+      <ion-input formControlName="amount" placeholder="Expense Amount" type="number"></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" (click)="dismiss()">Cancel</ion-button>
+    <ion-button [disabled]="form.invalid" expand="full" type="submit">Submit</ion-button>
+</form>
+</ion-content>

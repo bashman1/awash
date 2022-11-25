@@ -1,0 +1,510 @@
+<ion-header>
+  <ion-toolbar class="top-header">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Member Registration</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card style="padding: 20px">
+    <form [formGroup]="selfRegistration" (ngSubmit)="selfReg()" enctype="multipart/form-data">
+      <div>
+        <span [ngStyle]="{'display': displayInstitution}">
+          <h1>Select Institution</h1>
+
+          <ion-item>
+            <ion-label>Select Institution</ion-label>
+            <ionic-selectable [(ngModel)]="institution" [items]="institutionList" itemValueField="id"
+              itemTextField="institution_name" [canSearch]="true" (onChange)="institutionChange($event)"
+              formControlName="selectInstitution" required>
+              <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.selectInstitution">
+                  <div class="error-message"
+                    *ngIf="selfRegistration.get('selectInstitution').hasError(validation.type) && (selfRegistration.get('selectInstitution').dirty || selfRegistration.get('selectInstitution').touched)">
+                    {{ validation.message}}
+                  </div>
+                </ng-container>
+              </div>
+            </ionic-selectable>
+
+          </ion-item>
+
+          <!-- <ion-item>
+            <span (click)="tost()">Tost</span>
+          </ion-item> -->
+          <!-- <ion-item>
+            <span style="font-size:large;" (click)="takePicture()">Test button</span>
+          </ion-item> -->
+<!-- 
+          <ion-item>
+            <img src="{{captured_img}}" alt="">
+          </ion-item> -->
+        </span>
+
+        <span [ngStyle]="{'display': displayLevels}">
+          <span [ngStyle]="{'display': Blevl1}">
+            <ion-item>
+              <ion-label>Select a {{lvl1}} </ion-label>
+              <ionic-selectable  [(ngModel)]="ngmodel1" [items]="branchList" itemValueField="branch_id"
+                itemTextField="branch_name" [canSearch]="true" formControlName="level1"
+                (onChange)="level1Change($event)">
+              </ionic-selectable>
+            </ion-item>
+          </span>
+
+          <span [ngStyle]="{'display': Blevl2}">
+            <ion-item>
+              <ion-label>Select a {{lvl2}} </ion-label>
+              <ionic-selectable [(ngModel)]="ngmodel2" [items]="branchsLevel1" itemValueField="branch_id"
+                itemTextField="branch_name" [canSearch]="true" formControlName="level2"
+                (onChange)="level2Change($event)">
+              </ionic-selectable>
+            </ion-item>
+          </span>
+
+          <span [ngStyle]="{'display': Blevl3}">
+            <ion-item>
+              <ion-label>Select a {{lvl3}} </ion-label>
+              <ionic-selectable [(ngModel)]="ngmodel3" [items]="branchsLevel2" itemValueField="branch_id"
+                itemTextField="branch_name" [canSearch]="true" formControlName="level3"
+                (onChange)="level3Change($event)">
+              </ionic-selectable>
+            </ion-item>
+          </span>
+
+          <span [ngStyle]="{'display': Blevl4}">
+            <ion-item>
+              <ion-label>Select a {{lvl4}} </ion-label>
+              <ionic-selectable [(ngModel)]="ngmodel4" [items]="branchsLevel3" itemValueField="branch_id"
+                itemTextField="branch_name" [canSearch]="true" formControlName="level4"
+                (onChange)="level4Change($event)">
+              </ionic-selectable>
+            </ion-item>
+          </span>
+
+          <span [ngStyle]="{'display': Blevl5}">
+            <ion-item>
+              <ion-label>Select a {{lvl5}} </ion-label>
+              <ionic-selectable [(ngModel)]="ngmodel5" [items]="branchsLevel4" itemValueField="branch_id"
+                itemTextField="branch_name" [canSearch]="true" formControlName="level5"
+                (onChange)="level5Change($event)">
+              </ionic-selectable>
+            </ion-item>
+          </span>
+
+          <span [ngStyle]="{'display': Blevl6}">
+            <ion-item>
+              <ion-label>Select a {{lvl6}} </ion-label>
+              <ionic-selectable [(ngModel)]="ngmodel6" [items]="branchsLevel5" itemValueField="branch_id"
+                itemTextField="branch_name" [canSearch]="true" formControlName="level6"
+                (onChange)="level6Change($event)">
+              </ionic-selectable>
+            </ion-item>
+          </span>
+
+          <span [ngStyle]="{'display': Blevl7}">
+            <ion-item>
+              <ion-label>Select a {{lvl7}} </ion-label>
+              <ionic-selectable [(ngModel)]="ngmodel7" [items]="branchsLevel6" itemValueField="branch_id"
+                itemTextField="branch_name" [canSearch]="true" formControlName="level7"
+                (onChange)="level7Change($event)">
+              </ionic-selectable>
+            </ion-item>
+          </span>
+
+          <span [ngStyle]="{'display': Blevl8}">
+            <ion-item>
+              <ion-label>Select a {{lvl8}} </ion-label>
+              <ionic-selectable [(ngModel)]="ngmodel8" [items]="branchsLevel7" itemValueField="branch_id"
+                itemTextField="branch_name" [canSearch]="true" formControlName="level8"
+                (onChange)="level8Change($event)">
+              </ionic-selectable>
+            </ion-item>
+          </span>
+
+          <span [ngStyle]="{'display': Blevl9}">
+            <ion-item>
+              <ion-label>Select a {{lvl9}} </ion-label>
+              <ionic-selectable [(ngModel)]="ngmodel9" [items]="branchsLevel8" itemValueField="branch_id"
+                itemTextField="branch_name" [canSearch]="true" formControlName="level9"
+                (onChange)="level9Change($event)">
+              </ionic-selectable>
+            </ion-item>
+          </span>
+
+          <span [ngStyle]="{'display': Blevl10}">
+            <ion-item>
+              <ion-label>Select a {{lvl10}} </ion-label>
+              <ionic-selectable [(ngModel)]="ngmodel10" [items]="branchsLevel9" itemValueField="branch_id"
+                itemTextField="branch_name" [canSearch]="true" formControlName="level10"
+                (onChange)="level10Change($event)">
+              </ionic-selectable>
+            </ion-item>
+          </span>
+
+        </span>
+      </div>
+
+
+      <div [ngStyle]="{'display': displayBasicInfo}">
+        <h1>Basic Information</h1>
+        <ion-item>
+          <ion-label>Select Title</ion-label>
+          <ion-select [interfaceOptions]="customActionSheetOptions" interface="popover" formControlName="title">
+            <ion-select-option *ngFor="let title of titleList" value="{{ title.description }}">{{title.description}}
+            </ion-select-option>
+          </ion-select>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.title">
+              <div class="error-message"
+                *ngIf="selfRegistration.get('title').hasError(validation.type) && (selfRegistration.get('title').dirty || selfRegistration.get('title').touched)">
+                {{ validation.message}}
+              </div>
+            </ng-container>
+          </div>
+        </ion-item>
+
+        <ion-item>
+          <ion-input placeholder="First Name" formControlName="firstName"></ion-input>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.firstName">
+              <div class="error-message"
+                *ngIf="selfRegistration.get('firstName').hasError(validation.type) && (selfRegistration.get('firstName').dirty || selfRegistration.get('firstName').touched)">
+                {{ validation.message}}
+              </div>
+            </ng-container>
+          </div>
+        </ion-item>
+        <ion-item>
+          <ion-input placeholder="Last Name" formControlName="lastName"></ion-input>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.lastName">
+              <div class="error-message"
+                *ngIf="selfRegistration.get('lastName').hasError(validation.type) && (selfRegistration.get('lastName').dirty || selfRegistration.get('lastName').touched)">
+                {{ validation.message}}
+              </div>
+            </ng-container>
+          </div>
+        </ion-item>
+        <ion-item>
+          <ion-input placeholder="Middle Name" formControlName="middletName"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Date Of Birth</ion-label>
+          <ion-input type="date" max="{{currentDate}}" formControlName="dateOfBirth"></ion-input>
+          <!-- <ion-datetime displayFormat="DD/MM/YYYY" min="1900-03-14" max="2020-12-09" formControlName="dateOfBirth"> -->
+          <!-- </ion-datetime> -->
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.dateOfBirth">
+              <div class="error-message"
+                *ngIf="selfRegistration.get('dateOfBirth').hasError(validation.type) && (selfRegistration.get('dateOfBirth').dirty || selfRegistration.get('dateOfBirth').touched)">
+                {{ validation.message}}
+              </div>
+            </ng-container>
+          </div>
+        </ion-item>
+
+        <ion-list>
+          <ion-radio-group formControlName="gender">
+            <ion-list-header>
+              <ion-label>Gender</ion-label>
+            </ion-list-header>
+            <ion-item *ngFor="let gender of genderList">
+              <ion-label>{{gender.description}}</ion-label>
+              <ion-radio slot="start" value="{{gender.description}}"></ion-radio>
+      
+            </ion-item>
+
+          </ion-radio-group>
+        </ion-list>
+
+        <ion-item>
+          <ion-input placeholder="Alternative Member Number" formControlName="oldCustNo"></ion-input>
+        </ion-item>
+      </div>
+
+
+
+      <div [ngStyle]="{'display': displayContact}">
+        <h1>Contact Information</h1>
+        <ion-item>
+          <ion-input placeholder="Email" formControlName="email"></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.email">
+            <div class="error-message"
+              *ngIf="selfRegistration.get('email').hasError(validation.type) && (selfRegistration.get('email').dirty || selfRegistration.get('email').touched)">
+              {{ validation.message}}
+            </div>
+          </ng-container>
+        </div>
+
+
+        <ion-item>
+          <ion-label>Select Country Code</ion-label>
+          <ionic-selectable [(ngModel)]="countryCodeModel" [items]="contactCodelist" itemValueField="dialingCode"
+            itemTextField="countryName" [canSearch]="true" (onChange)="onSelectCcountryCode($event)"
+            formControlName="contactCode">
+          </ionic-selectable>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-input type="number"  placeholder="758479763" formControlName="phoneNo"></ion-input> <!-- (keyup)="showCode($event)" -->
+
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.phoneNo">
+            <div class="error-message"
+              *ngIf="selfRegistration.get('phoneNo').hasError(validation.type) && (selfRegistration.get('phoneNo').dirty || selfRegistration.get('phoneNo').touched)">
+              {{ validation.message}}
+            </div>
+          </ng-container>
+        </div>
+
+
+        <!-- <ion-item>
+          <input type="number"
+          required
+          ng2TelInput
+          (keyup)="showCode($event)"
+          [ng2TelInputOptions]="{initialCountry: country }"
+          (hasError)="hasError($event)"
+          (ng2TelOutput)="getNumber($event)"
+          (intlTelInputObject)="telInputObject($event)"
+          (countryChange)="onCountryChange($event)" />
+        </ion-item> -->
+
+      </div>
+
+
+      <div [ngStyle]="{'display': displayAddress}">
+        <h1>Address Information</h1>
+
+        <ion-item>
+          <ion-label>Select Region</ion-label>
+          <ionic-selectable [(ngModel)]="regionModel" [items]="regionList" itemValueField="id" itemTextField="name"
+            [canSearch]="true" (onChange)="onSelectRegion($event)" formControlName="region">
+          </ionic-selectable>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-label>Select District</ion-label>
+          <ionic-selectable [(ngModel)]="districtModel" [items]="districtList" itemValueField="id"
+            itemTextField="districtName" [canSearch]="true" (onChange)="onSelectDistrict($event)"
+            formControlName="district">
+          </ionic-selectable>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-label>Select County</ion-label>
+          <ionic-selectable [(ngModel)]="countytModel" [items]="countylist" itemValueField="id"
+            itemTextField="countyName" [canSearch]="true" (onChange)="onSelectCounty($event)" formControlName="county">
+          </ionic-selectable>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-label>Select Sub County</ion-label>
+          <ionic-selectable [(ngModel)]="subCountytModel" [items]="subCountylist" itemValueField="id"
+            itemTextField="subCountyName" [canSearch]="true" (onChange)="onSelectSubCounty($event)"
+            formControlName="subCounty">
+          </ionic-selectable>
+        </ion-item>
+
+
+
+        <ion-item>
+          <ion-label>Select Parish</ion-label>
+          <ionic-selectable [(ngModel)]="parishModel" [items]="parishList" itemValueField="id"
+            itemTextField="parishName" [canSearch]="true" (onChange)="onSelectParish($event)" formControlName="parish">
+          </ionic-selectable>
+        </ion-item>
+
+
+
+        <ion-item>
+          <ion-input placeholder="Enter Village" formControlName="village"></ion-input>
+
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.village">
+              <div class="error-message"
+                *ngIf="selfRegistration.get('village').hasError(validation.type) && (selfRegistration.get('village').dirty || selfRegistration.get('village').touched)">
+                {{ validation.message}}
+              </div>
+            </ng-container>
+          </div>
+
+        </ion-item>
+
+        <ion-item>
+          <ion-input placeholder="Enter Plot Number" formControlName="plotNo"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input placeholder="coordinates" formControlName="cordinates"></ion-input>
+        </ion-item>
+      </div>
+
+      <div [ngStyle]="{'display': displayID}">
+        <h1>Identification Information</h1>
+        <ion-item>
+          <ion-label>Select ID </ion-label>
+          <ion-select [interfaceOptions]="customActionSheetOptions" (ionChange)="onIdTypeChange($event)" interface="popover" formControlName="idtype">
+            
+            <ion-select-option value="{{ idType.description}}" *ngFor="let idType of idTypeRef">{{ idType.description}}</ion-select-option>
+
+            <!-- <ion-select-option value="Employee Id">Employee Id</ion-select-option>
+            <ion-select-option value="Student Id">Student Id</ion-select-option>
+            <ion-select-option value="Driving permit">Driving permit</ion-select-option>
+            <ion-select-option value="NSSF Card">NSSF Card</ion-select-option>
+            <ion-select-option value="Passport">Passport</ion-select-option> -->
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-input type="text" placeholder="Id number" formControlName="idNo"></ion-input>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.idNo">
+              <div class="error-message"
+                *ngIf="selfRegistration.get('idNo').hasError(validation.type) && (selfRegistration.get('idNo').dirty || selfRegistration.get('idNo').touched)">
+                {{ validation.message}}
+              </div>
+            </ng-container>
+          </div>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">ID Issue Date</ion-label>
+          <!-- <ion-datetime displayFormat="DD/MM/YYYY" min="1900-03-14" max="2020-12-09" formControlName="issueDate">
+          </ion-datetime> -->
+          <ion-input type="date" max="{{currentDate}}" formControlName="issueDate"></ion-input>
+
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.issueDate">
+              <div class="error-message"
+                *ngIf="selfRegistration.get('issueDate').hasError(validation.type) && (selfRegistration.get('issueDate').dirty || selfRegistration.get('issueDate').touched)">
+                {{ validation.message}}
+              </div>
+            </ng-container>
+          </div>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">ID Exp. Date</ion-label>
+          <!-- <ion-datetime displayFormat="DD/MM/YYYY" min="1900-03-14" max="3000-12-09" formControlName="expDate">
+          </ion-datetime> -->
+          <ion-input type="date" min="{{currentDate}}" formControlName="expDate"></ion-input>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.expDate">
+              <div class="error-message"
+                *ngIf="selfRegistration.get('expDate').hasError(validation.type) && (selfRegistration.get('expDate').dirty || selfRegistration.get('expDate').touched)">
+                {{ validation.message}}
+              </div>
+            </ng-container>
+          </div>
+        </ion-item>
+
+        <ion-item>
+          <ion-label id="profile_image" (click)="idFrontView()"  stacked>Upload ID Front View</ion-label>
+          <!-- <button type="button" ><ion-icon ios="ios-photos" md="md-photos"></ion-icon></button> -->
+          <!-- <ion-label id="profile_image"  stacked>ID Front View</ion-label>
+
+          <ion-input type="file" accept="image/*" id="upload" formControlName="idFront"
+            (change)="base64ImgIdFront($event)"></ion-input> -->
+        </ion-item>
+
+        <ion-item *ngIf="idFrontImg">
+          <ion-thumbnail slot="start">
+            <img [src]="idFrontImg" class="" *ngIf="idFrontImg">
+          </ion-thumbnail>
+          <ion-label *ngIf="idFrontImg">ID Front View</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label id="profile_image" (click)="idBackView()" color="primary" stacked>Upload ID Back View</ion-label>
+          <!-- <button type="button" >Take Picture</button> -->
+          <!-- <ion-label id="profile_image"  stacked>ID Back View</ion-label>
+          
+          <ion-input type="file" #file accept="image/*" id="upload" formControlName="idBack"
+            (change)="base64ImgIdBack($event)"></ion-input> -->
+        </ion-item>
+
+        <ion-item *ngIf="idBackImg">
+          <ion-thumbnail slot="start">
+            <img [src]="idBackImg" class="" *ngIf="idBackImg">
+          </ion-thumbnail>
+          <ion-label *ngIf="idBackImg">ID Back View</ion-label>
+        </ion-item>
+
+
+      </div>
+
+      <div [ngStyle]="{'display': displayProfile}">
+        <h1>Profile Picture</h1>
+        <ion-item>
+          <ion-label id="profile_image" (click)="profilePic()"  stacked>Upload Profile Picture</ion-label>
+          <!-- <button type="button" >Take Picture</button> -->
+          <!-- <ion-label id="profile_image"  stacked>Upload Profile Picture</ion-label>
+
+          <ion-input type="file" accept="image/*" id="upload" formControlName="profilePic"
+            (change)="base64ImgProfilePic($event)"></ion-input> -->
+        </ion-item> 
+
+        <ion-item *ngIf="profilePicImg">
+          <ion-thumbnail slot="start">
+            <img [src]="profilePicImg" class="" *ngIf="profilePicImg">
+          </ion-thumbnail>
+          <ion-label *ngIf="profilePicImg">Profile Picture</ion-label>
+        </ion-item>
+
+      </div>
+
+      <div class="self-reg-buttons">
+        <button class="btn" type="button" [ngStyle]="{'display': displayInstitution}"
+          (click)="firstPage()">next</button>
+        <button class="btn" type="button" [ngStyle]="{'display': displayLevels}" (click)="secondPage()">next</button>
+        <button class="btn" type="button" [ngStyle]="{'display': displayLevels}" (click)="backFirstPage()">back</button>
+        <button class="btn" type="button" [ngStyle]="{'display': displayBasicInfo}" (click)="thirdPage()">next</button>
+        <button class="btn" type="button" [ngStyle]="{'display': displayBasicInfo}"
+          (click)="backSecondPage()">back</button>
+        <button class="btn" type="button" [ngStyle]="{'display': displayContact}" (click)="forthPage()">next</button>
+        <button class="btn" type="button" [ngStyle]="{'display': displayContact}"
+          (click)="backthirdPage()">back</button>
+        <button class="btn" type="button" [ngStyle]="{'display': displayAddress}" (click)="fifthPage()">next</button>
+        <button class="btn" type="button" [ngStyle]="{'display': displayAddress}"
+          (click)="backForthPage()">back</button>
+        <button class="btn" type="button" [ngStyle]="{'display': displayID}" (click)="sixthPage()">next</button>
+        <button class="btn" type="button" [ngStyle]="{'display': displayID}" (click)="backFifthPage()">back</button>
+        <button class="btn" type="button" [ngStyle]="{'display': displayProfile}"
+          (click)="backSixthPage()">back</button>
+      </div>
+
+
+      <ion-button expand="block" [ngStyle]="{'display': displayProfile}" type="submit">Submit</ion-button>
+    </form>
+    <div class="results" [ngStyle]="{'display': displayresults}">
+      <p style="color: #000000;">Please note that the member number is your payment reference. 
+        Visit Vantage Website for more information</p>
+      <table class="table">
+        <tr>
+          <th class="text-align-left height">Name</th>
+          <td class="text-align-right height">{{returnDataList.name | titlecase}}</td>
+        </tr>
+        <tr>
+          <th class="text-align-left height">Member Number</th>
+          <td class="text-align-right height">{{returnDataList.custNo}}</td>
+        </tr>
+        <tr>
+          <th class="text-align-left height">Created On</th>
+          <td class="text-align-right height"> {{returnDataList.createDt | date :  'EEE dd MMM yyyy HH:mm:ss'}}</td>
+        </tr>
+      </table>
+      <!-- <ion-button expand="block" (click)="goToLogin()">Log In</ion-button> -->
+    </div>
+  </ion-card>
+ 
+</ion-content>

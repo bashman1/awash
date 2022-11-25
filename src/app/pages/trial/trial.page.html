@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>trial</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-input  [(ngModel)]="budget" #myBudget="ngModel" placeholder="Test Commas" (input)="budget = format(budget)" pattern="^[$\-\s]*[\d\,]*?([\.]\d{0,10})?\s*$" 
+    style="border:1px solid black" ></ion-input>
+  </ion-card>
+
+</ion-content>

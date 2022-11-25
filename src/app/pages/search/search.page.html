@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{customerRef}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <ion-searchbar animated></ion-searchbar> -->
+  <form [formGroup]="searchForm" (ngSubmit)="searchCustomer()">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-md="6">
+          <ion-input formControlName="customerName" type="text" placeholder="Enter Name"></ion-input>
+        </ion-col>
+        <ion-col size-md="3">
+          <ion-button size="small" type="submit" expand="block">Search</ion-button>
+
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="customerList.length>0">
+        <ion-col size-md="12">
+
+        <div class="row" *ngFor="let customer of customerList">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-subtitle>{{customer.name}}</ion-card-subtitle>
+              <ion-card-title>{{customer.cust_no}}</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-button  shape="round">Add Saving</ion-button>
+              <ion-button (click)="addLoan(customer)" shape="round">Add Loan</ion-button>
+            </ion-card-content>
+          </ion-card>
+
+        </div>
+
+        <!-- <ion-card *ngFor="let customer of customerList">
+      <ion-card-header>
+        <ion-card-subtitle>{{customer.name}}</ion-card-subtitle>
+        <ion-card-title>{{customer.cust_no}}</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+       
+      </ion-card-content>
+    </ion-card> -->
+  </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+</ion-content>

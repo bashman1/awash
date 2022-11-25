@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-toolbar class="top-header">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Pay For Extra Dependants</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-content>
+
+    <div *ngIf="!showPaymentRef">
+
+      <ion-card>
+        <form [formGroup]="extraDependentFormGp" *ngIf="extraDependentFormGp" (ngSubmit)="generateRefNo()">
+          <ion-item>
+            <ion-label position="floating">Member Number</ion-label>
+            <ion-input formControlName="custNo" type="text" value="{{verifiedPaymentReference.cust_no}}" readonly></ion-input>
+          </ion-item>
+          <div class="validation-errors" style="margin-bottom: 20px;">
+            <ng-container *ngFor="let validation of validation_messages.custNo">
+              <div class="error-message"
+                *ngIf="extraDependentFormGp.get('custNo').hasError(validation.type) && (extraDependentFormGp.get('custNo').dirty || extraDependentFormGp.get('custNo').touched)">
+                {{ validation.message }}
+              </div>
+            </ng-container>
+          </div>  
+  
+          <ion-item>
+            <ion-label position="floating">Enter Number of Dependents</ion-label>
+            <ion-input type="number" formControlName="extraDependants" ></ion-input>
+          </ion-item>
+          <div class="validation-errors" style="margin-bottom: 20px;">
+            <ng-container *ngFor="let validation of validation_messages.extraDependants">
+              <div class="error-message"
+                *ngIf="extraDependentFormGp.get('extraDependants').hasError(validation.type) && (extraDependentFormGp.get('extraDependants').dirty || extraDependentFormGp.get('extraDependants').touched)">
+                {{ validation.message }}
+              </div>
+            </ng-container>
+          </div>  
+          <ion-item>
+            <p>
+              {{'Cost per additional dependent ' + (selectedPackage.cost_per_additional_dependant | number:'1.0-0')
+              + ' | Total cost for ' + extraDependentFormGp.controls['extraDependants'].value + ' is '
+              + ((selectedPackage.cost_per_additional_dependant*extraDependentFormGp.controls['extraDependants'].value) | number:'1.0-0')  }}
+            </p>
+          </ion-item>
+          <ion-button type="submit" expand="block">Generate Payment Reference</ion-button>
+        </form>
+      </ion-card>
+
+    </div>
+    <div *ngIf="showPaymentRef">
+
+      <ion-card>
+        <p>Please use the payment reference below to pay for the selected service.</p>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6">Payment Reference:</ion-col>
+            <ion-col size="6">{{paymentRefNumber.paymentReference}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">Package:</ion-col>
+            <ion-col size="6">{{selectedPackage.package_name}}</ion-col>
+          </ion-row>
+          <!-- <ion-row>
+            <ion-col size="6">Package:</ion-col>
+            <ion-col size="6">{{selectedPackage.price}}</ion-col>
+          </ion-row> -->
+          <ion-row>
+            <ion-col size="6">Extra Dependents:</ion-col>
+            <ion-col size="6">{{extraDependentFormGp.controls['extraDependants'].value}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">Total Cost (Dependents):</ion-col>
+            <ion-col size="6">{{(extraDependentFormGp.controls['extraDependants'].value * selectedPackage.cost_per_additional_dependant) | number:'1.0-0'}}</ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="6">Amount To Pay:</ion-col>
+            <ion-col size="6">UGX {{ paymentRefNumber.expectedAmount | number:'1.0-0'}}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+
+    </div>
+
+
+  </ion-content>

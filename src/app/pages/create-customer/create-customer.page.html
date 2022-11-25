@@ -1,0 +1,126 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+    <ion-title>Create Member</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #userForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+  <ion-item>
+      <ion-select name="user_type" [(ngModel)]="customer.userType" placeholder="Select Customer Category">
+          <ion-select-option [value]="type.id" *ngFor="let type of customerType">{{type.description}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+    <ion-item>
+      <ion-select name="title" [(ngModel)]="title" placeholder="Select Title">
+      <ion-select-option [value]="title_s.id" *ngFor="let title_s of userTitle">{{title_s.description}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  
+  <ion-item>
+    <ion-input [(ngModel)]="customer.firstName" name="firstName" type="text" placeholder="Enter First Name"></ion-input>
+  </ion-item>
+  
+  <ion-item>
+    <ion-input [(ngModel)]="customer.lastName" name="lastName" type="text" placeholder="Enter Last Name"></ion-input>
+  </ion-item>
+<ion-item>
+  <ion-input [(ngModel)]="customer.middleName" name="middleName" type="text" placeholder="Enter Middle Name"></ion-input>
+
+ </ion-item>
+   <ion-item>
+      <ion-label>Gender</ion-label>
+      <ion-select name="gender">
+        <ion-select-option selected="" value="Male">Male</ion-select-option>
+        <ion-select-option value="Female">Female</ion-select-option>
+
+  
+      </ion-select>
+    </ion-item>
+    <ion-grid>
+        <ion-row>
+          <ion-col size="4">
+              <ion-item>
+                  <ion-label>Country Code</ion-label>
+                  <ion-select name="countryCode" [(ngModel)]="selectedCode" placeholder="Select Regions">
+                    <ion-select-option [value]="country.dialingCode" name="countryCode" *ngFor="let country of countryRefData">{{country.dialingCode}}</ion-select-option>
+                  </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="8">  
+                <ion-item>
+                    <ion-label>Contact</ion-label>
+                    <ion-input #contact="ngModel" [class.is-invalid]="contact.invalid && contact.touched" [pattern]="contactPattern" [(ngModel)]="customer.contact" name="contact" type="text" placeholder="Enter Phone Number"></ion-input>
+                    <div *ngIf="contact.errors && (contact.invalid || contact.touched)">
+                        <small class="text-danger" *ngIf="contact.errors.pattern">Phone number must be 9 digits</small>
+                     </div>
+                
+                </ion-item>
+              </ion-col>
+          </ion-row>
+      </ion-grid>
+
+  <ion-item>
+      <ion-label>Region</ion-label>
+      <ion-select name="region" [(ngModel)]="region"  (ionChange)="getDistricts()" placeholder="Select Regions">
+        <ion-select-option [value]="region_s.id" *ngFor="let region_s of regions">{{region_s.name}}</ion-select-option>
+  
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>District</ion-label>
+        <ion-select name="district" [(ngModel)]="district" (ionChange)="getCounties($event.value)" placeholder="Select Districts">
+          <ion-select-option [value]="district_s.id" *ngFor="let district_s of districts">{{district_s.districtName}}</ion-select-option>
+    
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+          <ion-label>Counties</ion-label>
+          <ion-select name="county" [(ngModel)]="county" placeholder="Select Counties" (ionChange)="getSubcounties()">
+            <ion-select-option *ngFor="let county_s of counties" [value]="county_s.id">{{county_s.countyName}}</ion-select-option>      
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Sub Counties</ion-label>
+            <ion-select name="subcounty" [(ngModel)]="subcounty" (ionChange)="getParishes()" placeholder="Select Sub county">
+              <ion-select-option *ngFor="let subcounty_s of subcounties" [value]="subcounty_s.id">{{subcounty_s.subCountyName}}</ion-select-option>      
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+              <ion-label>Parish</ion-label>
+              <ion-select name="parish" [(ngModel)]="parish" placeholder="Select parishes">
+                <ion-select-option *ngFor="let parish_s of parishes" [value]="parish_s.id">{{parish_s.parishName}}</ion-select-option>      
+              </ion-select>
+            </ion-item>
+
+    </form>
+
+<!-- <ion-tabs>
+  <ion-tab-bar slot="top">
+    <ion-tab-button tab="general">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>General Info</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar> -->
+  <!-- <ion-content fullscreen class="ion-padding tabs-icon-top"> -->
+    
+
+      
+  <!-- </ion-content> -->
+<!-- </ion-tabs> -->
+
+
+          
+            
+
+
+</ion-content>

@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/menu/loan-appraisal"></ion-back-button>
+        </ion-buttons>
+    <ion-title>Family Expenses</ion-title>
+  </ion-toolbar>
+</ion-header>
+<div class="fixed-header">
+    <h2 color="primary">Total:{{total |number : '1.0'}}</h2>
+ </div>
+<ion-content>
+    <p>Family Expenses</p>
+    <ion-card>
+    <form [formGroup]="familyExpenseForm" (ngSubmit)="submit()">
+    <h6>How much do you spend on the following monthly?</h6>
+    <ion-item>
+      <ion-input formControlName="food" placeholder="Food" type="number" (keyup)="totalExpense()"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-input formControlName="cookingFuel" placeholder="Cooking Fuel(Charcoal,gas,etc)" type="number" (keyup)="totalExpense()"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-input formControlName="rent" placeholder="Rent" type="number" (keyup)="totalExpense()"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-input formControlName="transportation" placeholder="Transportation" type="number" (keyup)="totalExpense()"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-input formControlName="telephone" placeholder="Telephone(Airtime,Messsages)" type="number" (keyup)="totalExpense()"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-input formControlName="clothing" placeholder="Clothing AND Shoes" type="number" (keyup)="totalExpense()"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-input formControlName="education" placeholder="Education" type="number" (keyup)="totalExpense()"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-input formControlName="medication" placeholder="Health/Medication" type="number" (keyup)="totalExpense()"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-input formControlName="utilities" placeholder="Utility Bills(Electricity, Water,etc)" type="number" (keyup)="totalExpense()"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-input formControlName="entertainment" placeholder="Entertainment" type="number" (keyup)="totalExpense()"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-input formControlName="salary" placeholder="Salary" type="number" (keyup)="totalExpense()"></ion-input>
+    </ion-item>
+    <div *ngIf="expenseList.length>0">
+        <p>Other expenses</p>
+        <ion-item *ngFor="let item of expenseList">
+            <ion-label position="stacked">{{item.name}}</ion-label>
+            <ion-input type="text" readonly>{{item.amount}}</ion-input>
+        </ion-item>
+      </div>
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="getModal()">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+   
+    <ion-button color="primary" type="submit" fill="solid">Submit</ion-button>
+    <!-- <ion-button (click)="redirect()" color="success" fill="solid"><ion-icon slot="end" name="arrow-forward"></ion-icon>Next</ion-button> -->
+
+    </form>
+  </ion-card>
+    
+</ion-content>

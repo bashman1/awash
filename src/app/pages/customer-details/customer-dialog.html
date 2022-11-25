@@ -1,0 +1,15 @@
+
+<h1 mat-dialog-title>Member Information</h1>
+<div class="row" mat-dialog-content>
+            <div>Name: {{data.customer_name}}</div>
+            <div>ID Number: {{data.nin}}</div>
+            <div>Total Debits: {{data.total_debits}}</div>
+            <div>Total Credits: {{data.total_credits}}</div>
+            <div>Date of registration(D/M/Y): {{data.date}}</div>
+            <div class="info">*Note: Your line has been registered for {{data.expire}} months</div>
+            <!-- 'yyyy-MM-dd' -->
+</div>
+<div mat-dialog-actions>
+    <button cdkFocusInitial (click)="onNoClick()" mat-button mat-dialog-close>Close</button>
+  </div>
+  <!-- 05848c281e5655b1 -->

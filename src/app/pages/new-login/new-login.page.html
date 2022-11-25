@@ -1,0 +1,253 @@
+<ion-content>
+
+ <!-- <ion-icon name="qr-code-outline" style="color: #1f81c5; float: left; font-size: 30px; margin-top: 30px; margin-left: 10px;" (click)="qrScanner()"></ion-icon> -->
+
+  <!-- <ion-icon name="information" style="color: #1f81c5; float: right; margin-top: 10px; font-size: 60px; " (click)="uniqueNo()"></ion-icon> -->
+
+  <div class="div-logo">
+    <ion-img class="img" src="../../assets/img/awash_enhance.jpeg" alt="Logo"></ion-img>
+  </div>
+
+  <!-- <ion-card class="login-card"> -->
+  <div class="login-collaction">
+    <div class="nepserv" style="color:#2a3998">
+      Awash Loans
+    </div>
+
+    <form *ngIf="loginForm" [formGroup]="loginForm" (ngSubmit)="login()">
+
+      <ion-grid>
+        <ion-row color="primary">
+          <ion-col size-md="12" size-lg="12" size-xs="12">
+
+            <!-- <div  [ngStyle]="{'display': displayAgent}" id="agent" > -->
+            <div id="customer" [ngStyle]="{'display': displayCustomer}">
+              <ion-item>
+
+                <ion-icon name="person-outline"></ion-icon>
+                <ion-input formControlName="userName" type="text" placeholder="Account Number"
+                  style="padding-left:10px !important;"></ion-input>
+
+              </ion-item>
+
+              <div class="validation-errors" style="margin-bottom: 20px;">
+                <ng-container *ngFor="let validation of validation_messages.userName">
+                  <div class="error-message"
+                    *ngIf="loginForm.get('userName').hasError(validation.type) && (loginForm.get('userName').dirty || loginForm.get('userName').touched)">
+                    {{ validation.message }}
+                  </div>
+                </ng-container>
+              </div>
+
+              <ion-item>
+                <ion-icon name="lock-closed-outline"></ion-icon>
+                <ion-input formControlName="password" [type]="isPasswordSeen? 'text':'password'" placeholder="Password"
+                  style="padding-left:10px !important;"></ion-input>
+                  <ion-icon [name]=" isPasswordSeen? 'eye-outline' :'eye-off-outline'" (click)="isPasswordSeen =!isPasswordSeen" item-right></ion-icon>
+         
+
+              </ion-item>
+              <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.password">
+                  <div class="error-message"
+                    *ngIf="loginForm.get('password').hasError(validation.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">
+                    {{ validation.message }}
+                  </div>
+                </ng-container>
+              </div>
+
+            </div>
+
+            <div [ngStyle]="{'display': loginbtn}">
+              <ion-button class="margin-top" size="small" [disabled]="loginForm.invalid" type="submit" expand="block">
+                Login</ion-button>
+
+              <ion-grid class="margin-top">
+                <ion-row>
+                  <ion-col size="6"><a id="c_pass" class="color-white" href="#" (click)="register($event)">Create
+                      Password</a></ion-col>
+                  <ion-col size="6"><a id="f_pass" class="color-white" href="#" (click)="forgotPassword($event)">Forgot
+                      Password?</a></ion-col>
+                </ion-row>
+              </ion-grid>
+
+              <!-- <div class="btn margin-top"><ion-button class="color-white" size="small" (click)="openModal(1,2)" fill="clear">open modal</ion-button></div> -->
+              <!-- <div class="btn margin-top"><ion-button size="small" (click)="register()" fill="clear">Create Password</ion-button></div>
+            <div class="btn margin-top"><ion-button class="color-white" size="small" (click)="forgotPassword()" fill="clear">Forgot Password</ion-button></div>
+            <div class="o-r margin-top">OR</div> -->
+              <div class="btn margin-top">
+                <ion-button size="small" (click)="selfReg()" fill="clear">Self Registration</ion-button>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+    <div class="ion-padding" [ngStyle]="{'display': displayCustomerRegistration}">
+
+      <div *ngIf="!token_sent">
+        <form *ngIf="sendTokenForm" [formGroup]="sendTokenForm" (ngSubmit)="sendPasswordToken()">
+          <ion-item>
+            <ion-icon name="person-outline"></ion-icon>
+            <ion-input formControlName="custNo" type="text" placeholder="Enter Your Username"
+              style="padding-left:10px !important;"></ion-input>
+          </ion-item>
+
+          <div class="validation-errors" style="margin-bottom: 20px;">
+            <ng-container *ngFor="let validation of validation_messages.custNo">
+              <div class="error-message"
+                *ngIf="sendTokenForm.get('custNo').hasError(validation.type) && (sendTokenForm.get('custNo').dirty || sendTokenForm.get('custNo').touched)">
+                {{ validation.message }}
+              </div>
+            </ng-container>
+          </div>
+
+          <div>
+            <ion-button size="small" type="submit" [disabled]="sendTokenForm.invalid" expand="block">Continue
+            </ion-button>
+          </div>
+
+          <div>
+            <ion-button size="small" class="back-btn" (click)="iHaveAToken()" type="button" fill="clear" expand="block">
+              I have a token</ion-button>
+          </div>
+
+        </form>
+      </div>
+
+      <div *ngIf="token_sent && token_allowed">
+        <!-- *ngIf="token_sent && token_allowed" -->
+        <form *ngIf="createPasswordWithTokenForm" [formGroup]="createPasswordWithTokenForm"
+          (ngSubmit)="createPasswordWithToken()">
+          <ion-item>
+            <ion-icon name="person-outline"></ion-icon>
+            <ion-input formControlName="custNo" type="text" placeholder="Enter Your Username"
+              style="padding-left:10px !important;"></ion-input>
+          </ion-item>
+
+          <div class="validation-errors" style="margin-bottom: 20px;">
+            <ng-container *ngFor="let validation of validation_messages.custNo">
+              <div class="error-message"
+                *ngIf="createPasswordWithTokenForm.get('custNo').hasError(validation.type) && (createPasswordWithTokenForm.get('custNo').dirty || createPasswordWithTokenForm.get('custNo').touched)">
+                {{ validation.message }}
+              </div>
+            </ng-container>
+          </div>
+
+          <ion-item>
+            <ion-icon name="pricetag-outline"></ion-icon>
+            <ion-input formControlName="token" type="text" placeholder="Token" style="padding-left:10px !important;">
+            </ion-input>
+          </ion-item>
+
+          <div class="validation-errors" style="margin-bottom: 20px;">
+            <ng-container *ngFor="let validation of validation_messages.token">
+              <div class="error-message"
+                *ngIf="createPasswordWithTokenForm.get('token').hasError(validation.type) && (createPasswordWithTokenForm.get('token').dirty || createPasswordWithTokenForm.get('token').touched)">
+                {{ validation.message }}
+              </div>
+            </ng-container>
+          </div>
+
+          <ion-item>
+             <ion-icon name="lock-closed-outline"></ion-icon>
+            <ion-input formControlName="Rpin" [type]="isCreatePasswordSeen?'text':'password'" placeholder="Create Password."
+              style="padding-left:10px !important;"></ion-input>
+              <ion-icon [name]="isCreatePasswordSeen? 'eye-outline' :'eye-off-outline'" (click)="isCreatePasswordSeen =!isCreatePasswordSeen" item-right></ion-icon>
+          </ion-item>
+
+          <div class="validation-errors" style="margin-bottom: 20px;">
+            <ng-container *ngFor="let validation of validation_messages.Rpin">
+              <div class="error-message"
+                *ngIf="createPasswordWithTokenForm.get('Rpin').hasError(validation.type) && (createPasswordWithTokenForm.get('Rpin').dirty || createPasswordWithTokenForm.get('Rpin').touched)">
+                {{ validation.message }}
+              </div>
+            </ng-container>
+          </div>
+
+
+          <ion-item>
+             <ion-icon name="lock-closed-outline"></ion-icon>
+            <ion-input formControlName="confirmPin" [type]="isConfirmPasswordSeen?'text':'password'" placeholder="Confirm Password."
+              style="padding-left:10px !important;"></ion-input>
+              <ion-icon [name]="isConfirmPasswordSeen? 'eye-outline' :'eye-off-outline'" (click)="isConfirmPasswordSeen =!isConfirmPasswordSeen" item-right></ion-icon>
+          </ion-item>
+          <ion-label *ngIf="createPasswordWithTokenForm.controls['confirmPin'].errors?.ConfirmPassword"
+            style="color: red">
+            Passwords do not match
+          </ion-label>
+
+          <div>
+            <ion-button size="small" type="submit" [disabled]="createPasswordWithTokenForm.invalid" expand="block">
+              Create Password</ion-button>
+          </div>
+
+        </form>
+      </div>
+
+      <div *ngIf="!token_allowed && token_sent">
+        <!--*ngIf="!token_allowed" -->
+        <form *ngIf="registrationForm" [formGroup]="registrationForm" (ngSubmit)="registration()">
+          <ion-item>
+            <ion-icon name="person-outline"></ion-icon>
+            <ion-input formControlName="custNo" type="text" placeholder="Enter Your Username"
+              style="padding-left:10px !important;"></ion-input>
+          </ion-item>
+
+          <div class="validation-errors" style="margin-bottom: 20px;">
+            <ng-container *ngFor="let validation of validation_messages.custNo">
+              <div class="error-message"
+                *ngIf="registrationForm.get('custNo').hasError(validation.type) && (registrationForm.get('custNo').dirty || registrationForm.get('custNo').touched)">
+                {{ validation.message }}
+              </div>
+            </ng-container>
+          </div>
+
+          <ion-item>
+             <ion-icon name="lock-closed-outline"></ion-icon>
+             <ion-input formControlName="Rpin" [type]="isCreatePasswordSeen?'text':'password'" placeholder="Create Password."
+             style="padding-left:10px !important;"></ion-input>
+             <ion-icon [name]="isCreatePasswordSeen? 'eye-outline' :'eye-off-outline'" (click)="isCreatePasswordSeen =!isCreatePasswordSeen" item-right></ion-icon>
+          </ion-item>
+
+          <div class="validation-errors" style="margin-bottom: 20px;">
+            <ng-container *ngFor="let validation of validation_messages.Rpin">
+              <div class="error-message"
+                *ngIf="registrationForm.get('Rpin').hasError(validation.type) && (registrationForm.get('Rpin').dirty || registrationForm.get('Rpin').touched)">
+                {{ validation.message }}
+              </div>
+            </ng-container>
+          </div>
+
+          <ion-item>
+             <ion-icon name="lock-closed-outline"></ion-icon>
+             <ion-input formControlName="confirmPin" [type]="isConfirmPasswordSeen?'text':'password'" placeholder="Confirm Password."
+             style="padding-left:10px !important;"></ion-input>
+             <ion-icon [name]="isConfirmPasswordSeen? 'eye-outline' :'eye-off-outline'" (click)="isConfirmPasswordSeen =!isConfirmPasswordSeen" item-right></ion-icon>
+          </ion-item>
+
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.confirmPin">
+              <div class="error-message"
+                *ngIf="registrationForm.get('confirmPin').hasError(validation.type) && (registrationForm.get('confirmPin').dirty || registrationForm.get('confirmPin').touched)">
+                {{ validation.message }}
+              </div>
+            </ng-container>
+          </div>
+          <ion-label *ngIf="registrationForm.controls['confirmPin'].errors?.MatchPassword" style="color: red">
+            Passwords do not match
+          </ion-label>
+          <div>
+            <ion-button size="small" type="submit" [disabled]="registrationForm.invalid" expand="block">Register
+            </ion-button>
+
+          </div>
+        </form>
+      </div>
+      <ion-button size="small" class="back-btn" (click)="backToLogIn()" type="button" fill="clear" expand="block">
+        Back</ion-button>
+    </div>
+  </div>
+
+
+</ion-content>

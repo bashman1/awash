@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/menu/agent-dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Loan Appraisal</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment>
+    <ion-segment-button value="customers" color="primary" (ionSelect)="customers()" checked><ion-icon name="home"></ion-icon></ion-segment-button>
+    <ion-segment-button value="noncustomers" color="primary" (ionSelect)="noncustomers()"> <ion-icon name="cash"></ion-icon></ion-segment-button>
+  </ion-segment>
+  <ion-card *ngFor="let appraisal of appraisals">
+    <ion-card-header>
+        <ion-card-subtitle>
+          <ion-grid>
+            <ion-row>
+              <ion-col>{{appraisal.business_name}}</ion-col>
+              <ion-col>{{appraisal.business_sector}}</ion-col>
+              <ion-col>{{appraisal.formatted_date_created}}</ion-col>
+            </ion-row>
+          </ion-grid>
+
+
+      </ion-card-subtitle>
+        
+      </ion-card-header>
+  <ion-grid>
+    <ion-row>
+      <ion-col><ion-button size="small" color="primary" (click)="add()">ADD<ion-icon slot="end" name="add"></ion-icon></ion-button></ion-col>
+      <ion-col><ion-button size="small" color="primary" (click)="edit()">EDIT<ion-icon slot="end" name="create"></ion-icon></ion-button></ion-col>
+      <ion-col><ion-button size="small" color="primary" (click)="view(appraisal)">VIEW<ion-icon slot="end" name="eye"></ion-icon></ion-button></ion-col>
+      <ion-col><ion-button size="small" color="warning" (click)="delete()">DELETE<ion-icon slot="end" name="trash"></ion-icon></ion-button></ion-col>
+
+    </ion-row>
+  </ion-grid>
+  
+</ion-card>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addProject()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

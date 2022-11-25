@@ -1,0 +1,30 @@
+.table{
+    width: 100%;
+}
+.table th{
+    width: 50%;
+    text-align: left;
+    // color: red;
+}
+.table td, .total{
+    width: 50%;
+    text-align: right;
+}
+.table tr{
+   border-bottom: 1px solid #1f81c5;
+
+}
+.title {
+    font-size: medium;
+    font-weight: 600;
+}
+.row{
+    font-size: medium;
+    font-weight: 600;
+    color:black;
+}
+.value {
+    font-size: medium;
+    font-weight: 600;
+    color: gray;
+}

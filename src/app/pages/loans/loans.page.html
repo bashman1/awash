@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar class="top-header">
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+    <ion-title>Loans</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+    <!-- <ion-card>
+        <ion-card-content>
+            <ion-list>
+              <ion-item>
+                <ion-label (click)=" loanApplication()">Loans Application</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-label (click)="currentLoans()">Active Loans</ion-label>
+              </ion-item>
+              
+              <ion-item>
+                <ion-label (click)="loanApraisal()">What If Analysis</ion-label>
+              </ion-item>
+              
+            </ion-list>
+                
+        </ion-card-content>
+      </ion-card> -->
+
+      <ion-grid>
+        <ion-row class="row">
+          <ion-col>
+            <ion-card (click)=" loanApplication()" class="new_style" size="6">
+              <div class="icon-container">
+                <ion-icon name="add"></ion-icon>
+              </div>
+              <div class="label-container">
+                Apply
+              </div>
+              
+          </ion-card> 
+          </ion-col>
+          <ion-col>
+            <ion-card (click)="currentLoans()" class="new_style" size="6">
+              <div class="icon-container">
+                <ion-icon name="wallet"></ion-icon>
+              </div>
+              <div class="label-container">
+                Active Loans
+              </div>
+             
+          </ion-card>
+          </ion-col>
+          <ion-col>
+            <ion-card (click)="loanApraisal()" class="new_style" size="6">
+              <div class="icon-container">
+                <ion-icon name="analytics"></ion-icon>
+              </div>
+              <div class="label-container">
+                Loan Calculator
+              </div>              
+          </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
+</ion-content>

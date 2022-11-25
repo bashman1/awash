@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar class="top-header">
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+    <ion-title>Member Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+    <ion-card *ngIf="customer_image!=null">
+        <ion-card-header>
+
+            
+
+        </ion-card-header>
+        <ion-img class="img" src=" {{ customer_image }}"></ion-img>
+        <ion-card-content>
+          <ion-card-subtitle>{{ 'Member No: '+cust_number }}</ion-card-subtitle>
+          <ion-card-title>{{'Name: '+customer_title+ " " +customer_name}}</ion-card-title>
+          <ion-card-subtitle *ngIf="customer_contact">{{ 'Contact: '+customer_contact }}</ion-card-subtitle>
+          <ion-card-subtitle>Date Of Birth: {{ date_of_birth |date:'dd/MM/yyyy' }}</ion-card-subtitle>
+          <ion-card-subtitle>{{ 'Gender: '+customer_gender }}</ion-card-subtitle>
+          <ion-card-subtitle>{{ 'Institution: '+ institutionName }}</ion-card-subtitle> 
+          <ion-card-subtitle *ngIf="branchList.parent_branch != null">{{ 'Parent Branch: ' + branchList.parent_branch }}</ion-card-subtitle>
+          <ion-card-subtitle>{{ 'Current Branch: '+branchList.current_branch  }}</ion-card-subtitle>
+          <!-- <ion-card-subtitle>{{ }}</ion-card-subtitle> -->
+        </ion-card-content>
+      </ion-card>
+
+        
+  <!-- customer_image: any;
+  cust_number:any;
+  customer_contact:any;
+  date_of_birth:any;
+  customer_name:any;
+  customer_gender:any;
+  customer_title:any; -->
+
+</ion-content>

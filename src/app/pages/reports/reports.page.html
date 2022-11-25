@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/menu/landing"></ion-back-button>
+        </ion-buttons>
+    <ion-title>reports</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-segment value="javascript">
+        <ion-segment-button (ionSelect)="segmentButtonClicked()">
+          <ion-label>Cash</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="javascript">
+          <ion-label>Javascript</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+</ion-content>

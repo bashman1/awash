@@ -1,0 +1,23 @@
+<ion-header color="primary">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="new-login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Institution Self Registration</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="institution-self-registration" selected="true">
+        <ion-icon name="person-add"></ion-icon>
+        <ion-label>Create User</ion-label>
+      </ion-tab-button>
+      <ion-tab-button (click)="selected('institution')">
+        <ion-icon name="home"></ion-icon>
+        <ion-label>Create Institution</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>

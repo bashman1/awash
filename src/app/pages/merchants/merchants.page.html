@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar  class="top-header">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Merchants</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <ion-card *ngIf="results">
+    <p>{{name +' '+custNo}}</p>
+    <p>Amount Paid: {{results.amountPaid}}</p>
+    <p>Created On: {{results.createdOn | date :  'EEE dd MMM yyyy HH:mm:ss'}}</p>
+    <p>Reference No: {{results.paymentReference}}</p>
+    <p>Subscription Status: {{results.subscriptionStatus}}</p>
+    <p>Payment Status: {{results.paymentStatus}}</p>
+
+  </ion-card> -->
+  <!-- <ion-card>
+    <form [formGroup]="serviceFormGp" *ngIf="serviceFormGp" (ngSubmit)="generateRefNo()">
+      <ion-item>
+        <ion-label>Select Service</ion-label>
+        <ion-select value="brown" [interfaceOptions]="customPopoverOptions" interface="popover" formControlName="service">
+          <ion-select-option value="{{service.id}}" *ngFor="let service of servicesList">{{service.categoryName}}</ion-select-option>
+          
+        </ion-select>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Select Company</ion-label>
+        <ion-select value="brown" [interfaceOptions]="customPopoverOptions" interface="popover" formControlName="company">
+          <ion-select-option value="{{company.id}}" *ngFor="let company of companyList">{{company.merchant_name}}</ion-select-option>
+          
+        </ion-select>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Select Package</ion-label>
+        <ion-select value="brown" [interfaceOptions]="customPopoverOptions" interface="popover" formControlName="packageId">
+          <ion-select-option value="{{package.id}}" *ngFor="let package of packageList">{{package.package_name}}</ion-select-option>
+         
+        </ion-select>
+      </ion-item>
+  
+      <ion-button type="submit" expand="block">Generate payment reference number </ion-button>
+  
+    </form>
+
+  </ion-card> -->
+
+  <ion-item>
+    <ion-label (click)="merchantServices()">Services</ion-label>
+  </ion-item>
+  <ion-item >
+    <ion-label (click)="merchantHistory()">Services History</ion-label>
+  </ion-item>
+
+
+</ion-content>

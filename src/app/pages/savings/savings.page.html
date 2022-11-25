@@ -1,0 +1,109 @@
+<ion-header>
+  <ion-toolbar class="top-header">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Savings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>{{ institutionName }}</ion-card-subtitle>
+      <ion-card-subtitle>{{name+"  |  "+custNo}}</ion-card-subtitle>
+    </ion-card-header>
+
+
+  </ion-card> -->
+
+  <div *ngFor="let cust of savingsAccountList">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>{{ "Account No. "+cust.acct_no }}</ion-card-subtitle>
+        <ion-card-title>{{ "Account Type: "+cust.displayName}}</ion-card-title>
+        <ion-card-subtitle>Account Balance: {{ cust.acct_balance | number:'1.0-0'}}</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  </div>
+
+
+
+
+  <!-- <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Savings Summary</ion-card-subtitle>
+    </ion-card-header>
+<div *ngFor="let cust of savingsAccountList">
+  <ion-button expand="block" (click)="details(cust.acct_no)">{{cust.product}}</ion-button>
+</div>
+    
+
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4">
+          {{ "Account Name" }}
+        </ion-col>
+        <ion-col size="4">
+          {{ "Account Number" }}
+        </ion-col>
+        <ion-col size="4">
+          {{ "Account Balance" }}
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngFor="let cust of savingsAccountList" class="text-bold text-black">
+      <ion-row>
+        <ion-col size="4" (click)="details(cust.acct_no)">
+          {{ cust.product }}
+        </ion-col>
+        <ion-col size="4" (click)="details(cust.acct_no)">
+          {{ cust.acct_no }}
+        </ion-col>
+        <ion-col size="4" (click)="details(cust.acct_no)">
+          {{ cust.acct_balance}}
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+
+  </ion-card> -->
+
+  <!-- <ion-card [ngStyle]="{'display': transDisplay}">
+    <ion-card-header>
+      <ion-card-subtitle>Transaction History</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3">Acc NO</ion-col>
+          <ion-col size="3">Amount</ion-col>
+          <ion-col size="3">Description</ion-col>
+          <ion-col size="3">Date</ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid *ngFor="let history of transHistory">
+        <ion-row>
+          <ion-col size="3">{{ history.acctNo }}</ion-col>
+          <ion-col size="3">{{ history.tranAmt}}</ion-col>
+          <ion-col size="3">{{history.description}}</ion-col>
+          <ion-col size="3">{{ history.tranDt | date:'dd-MM-yyyy'}}</ion-col>
+        </ion-row>
+      </ion-grid>
+
+      
+
+      
+    </ion-card-content>
+
+
+
+  </ion-card> -->
+
+</ion-content>

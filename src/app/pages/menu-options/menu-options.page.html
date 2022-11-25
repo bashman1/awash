@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>menuOptions</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<!-- <p>Choose an item for the appraisal</p> -->
+
+
+
+<ion-list lines="none">
+    <ion-radio-group (ionChange)="selected($event)">
+      <ion-list-header>
+        <ion-label>Choose an item for the appraisal</ion-label>
+      </ion-list-header>
+  
+      <ion-item *ngFor="let item of available">
+        <ion-label>{{item.name}}</ion-label>
+        <ion-radio slot="start" [(value)]="item.value"></ion-radio>
+      </ion-item>
+  
+      <!-- <ion-item>
+        <ion-label>Family Earnings</ion-label>
+        <ion-radio slot="start" value="familyEarning"></ion-radio>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Family Expenses</ion-label>
+        <ion-radio slot="start" value="familyExpense"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+          <ion-label>Stock Valuation</ion-label>
+          <ion-radio slot="start" value="stock"></ion-radio>
+        </ion-item>
+
+      <ion-item>
+          <ion-label>Sales Metrics</ion-label>
+          <ion-radio slot="start" value="sales"></ion-radio>
+        </ion-item>
+
+    <ion-item>
+        <ion-label>Operating Expense</ion-label>
+        <ion-radio slot="start" value="operatingExpense"></ion-radio>
+      </ion-item>
+
+    <ion-item>
+        <ion-label>Business Finance</ion-label>
+        <ion-radio slot="start" value="businessFinance"></ion-radio>
+      </ion-item> -->
+    </ion-radio-group>
+  </ion-list>
+  
+  
+</ion-content>

@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar class="top-header">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Services</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-item>
+      <ion-label  position="floating">Select Operation</ion-label>
+      <ion-select [interfaceOptions]="customActionSheetOptions" interface="popover">
+        <ion-select-option>First Time Payment</ion-select-option>
+        <ion-select-option>Pay For Dependents</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-card>
+
+  <ion-card *ngIf="serviceShow">
+    <form [formGroup]="serviceFormGp" *ngIf="serviceFormGp" (ngSubmit)="generateRefNo()">
+      <ion-item>
+        <ion-label  position="floating">Member Number</ion-label>
+        <ion-input value="{{custNo}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label  position="floating">Select Service</ion-label>
+        <ion-select value="brown" [interfaceOptions]="customPopoverOptions" interface="popover" formControlName="service" (ionChange)="onServiceChange($event)">
+          <ion-select-option value="{{service.id}}" *ngFor="let service of servicesList">{{service.service_name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label  position="floating">Select Company</ion-label>
+        <ion-select value="brown" [interfaceOptions]="customPopoverOptions" interface="popover" formControlName="company" (ionChange)="onMerchantChange($event)">
+          <ion-select-option value="{{company.merchant_id}}" *ngFor="let company of companyList">{{company.merchant_name}}</ion-select-option>
+          
+        </ion-select>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label  position="floating">Select Package</ion-label>
+        <ion-select value="brown" [interfaceOptions]="customPopoverOptions" interface="popover" formControlName="packageId" (ionChange)="onPackageChange($event)">
+          <ion-select-option value="{{package.id}}" *ngFor="let package of packageList">{{package.package_name}}</ion-select-option>
+         
+        </ion-select>
+      </ion-item>
+      <div *ngIf="selectedPackage.cost_per_additional_dependant">
+        <p>Other dependents additional ({{selectedPackage.cost_per_additional_dependant}}) per dependent</p>
+        <ion-item>
+          <!-- <ion-label position="floating">Dependents</ion-label> -->
+          <ion-input (ionChange)="dependentsChange()" value="" formControlName="extraDependants"></ion-input>
+        </ion-item>
+      </div>
+  
+      <ion-button type="submit"  expand="block">Generate payment number</ion-button>
+  
+    </form>
+
+  </ion-card>
+
+  <ion-card >
+
+  </ion-card>
+
+  <div *ngIf="!serviceShow" class="emptyMessage">
+    {{ 'No Services Found' }}
+  </div>
+
+
+</ion-content>

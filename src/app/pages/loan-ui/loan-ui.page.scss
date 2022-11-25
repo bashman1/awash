@@ -1,0 +1,96 @@
+.page{
+    --background: linear-gradient(197deg, rgba(100,100,100,1) 0%, rgb(31, 129, 197) 13.5%, rgb(31, 129, 197) 33.33%, rgb(31, 129, 197) 100%) !important;;
+}
+.karanzi{
+    width: 40px;
+  height: 40px;
+  border-radius: 25px;
+  padding-top: 5px;
+  box-sizing: border-box;
+    // background-color: rebeccapurple;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden
+}
+.karanzi img {
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%
+}
+.avatar{
+    display: flex;
+  flex-direction: row;
+  margin-top: 12%;
+  margin-left: 5%;
+}
+.label{
+    // background-color: aquamarine;
+    font-size: medium;
+}
+.balance {
+    display: flex;
+  flex-direction: column;
+  margin-top: 10%;
+}
+.figure{
+   font-weight: 300;
+//    background-color: yellow;
+
+}
+.text-color {
+    color: aliceblue;
+}
+
+.balance_figure {
+    margin-top: 10px;
+    font-size: 36px;
+    font-weight: 800;
+}
+.loan-menu {
+    display: flex;
+    flex-direction: row;
+    margin-top: 44px;
+}
+.div1{
+    margin-left: 15%;
+    background-color: rgba(51, 94, 154,0.5);
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    text-align: center;
+}
+.div2{
+    margin-left: 15%;
+    background-color: rgba(51, 94, 154,0.5);
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    text-align: center;
+}
+.div3{
+    margin-left: 15%;
+  background-color: rgba(51, 94, 154,0.5);
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    text-align: center;
+}
+.icon {
+    color: aliceblue;
+    font-size: 30px;
+    margin-top: 20%;
+
+}
+.text-trial{
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.transactions {
+    margin-top: 5%;
+    background-color: white;
+    height: 100%;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}

@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar class="top-header">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>shares</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngFor="let shares of sharesList">
+
+      <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ shares.share_name }}</ion-card-title>
+            <ion-card-subtitle>{{ shares.customer_shares_ref_number }}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+
+            Number of shares: {{ shares.no_of_shares }} <br>
+            Price per share: {{ shares.price_per_share }}
+          </ion-card-content>
+      
+        </ion-card>
+
+  </div>
+  <div *ngIf="!emptycheck" class="emptyMessage">
+    {{ emptyMessage }}
+  </div>
+
+
+
+
+
+</ion-content>

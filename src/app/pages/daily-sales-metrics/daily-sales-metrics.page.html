@@ -1,0 +1,285 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/menu/landing"></ion-back-button>
+        </ion-buttons>
+    <ion-title>Daily Sales Metrics</ion-title>
+  </ion-toolbar>
+</ion-header>
+<div color="primary"><h1>Total:{{total | number : '1.0'}}</h1></div>
+
+<p>In which of the days of the week do you have Good Sales(G)/ Normal Sales(N)/ Bad Sales(B)</p>
+<ion-content>
+
+<ion-card>
+  <form [formGroup]="salesForm" (ngSubmit)="submit()">
+<ion-grid>
+    <ion-row>
+        <ion-col class="align-self-start">
+          Working Days
+        </ion-col>
+        <ion-col class="align-self-center">
+            Daily Sales Rating
+          </ion-col>
+          <ion-col class="align-self-end">
+              Total Daily Sales
+            </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col class="align-self-start">
+         <ion-input formControlName="monday" style="border-bottom:0px" readonly></ion-input> 
+        </ion-col>
+        <ion-col class="align-self-center">
+
+              <ion-radio-group formControlName="mondayRate" (ionChange)="selectedMonday($event)">
+
+                  <ion-label color="success">G</ion-label>
+                  <ion-radio slot="start" value="G" checked></ion-radio>
+
+                  <ion-label color="warning">N</ion-label>
+                  <ion-radio slot="start" value="N"></ion-radio>
+
+                  <ion-label color="danger">B</ion-label>
+                  <ion-radio slot="start" value="B"></ion-radio>
+
+              </ion-radio-group>
+
+          </ion-col>
+
+          <ion-col class="align-self-end">
+             
+               <ion-input placeholder="600000" formControlName="mondaySales" type="number" (keyup)="sales()" readonly></ion-input>
+            
+            </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col class="align-self-start">
+          <ion-input formControlName="tuesday" style="border-bottom:0px" readonly></ion-input> 
+        </ion-col>
+        <ion-col class="align-self-center">
+
+              <ion-radio-group (ionChange)="selectedTuesday($event)" formControlName="tuesdayRate">
+
+                <ion-label color="success">G</ion-label>
+                <ion-radio slot="start" value="G" checked></ion-radio>
+
+                <ion-label color="warning">N</ion-label>
+                <ion-radio slot="start" value="N"></ion-radio>
+
+                <ion-label color="danger">B</ion-label>
+                <ion-radio slot="start" value="B"></ion-radio>
+
+              </ion-radio-group>
+
+          </ion-col>
+
+          <ion-col class="align-self-end">
+               <ion-input placeholder="600000" formControlName="tuesdaySales" type="number" (keyup)="sales()" readonly></ion-input>
+            </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col class="align-self-start">
+          <ion-input formControlName="wednesday" style="border-bottom:0px" readonly></ion-input>
+        </ion-col>
+        <ion-col class="align-self-center">
+
+              <ion-radio-group formControlName="wednesdayRate" (ionChange)="selectedWednesday($event)">
+
+                <ion-label color="success">G</ion-label>
+                <ion-radio slot="start" value="G" checked></ion-radio>
+
+                <ion-label color="warning">N</ion-label>
+                <ion-radio slot="start" value="N"></ion-radio>
+
+                <ion-label color="danger">B</ion-label>
+                <ion-radio slot="start" value="B"></ion-radio>
+
+              </ion-radio-group>
+
+          </ion-col>
+
+          <ion-col class="align-self-end">
+             
+               <ion-input placeholder="600000" formControlName="wednesdaySales" type="number" (keyup)="sales()" readonly></ion-input>
+            
+            </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col class="align-self-start">
+          <ion-input formControlName="thursday" style="border-bottom:0px" readonly></ion-input>
+        </ion-col>
+        <ion-col class="align-self-center">
+
+              <ion-radio-group formControlName="thursdayRate" (ionChange)="selectedThursday($event)">
+
+                <ion-label color="success">G</ion-label>
+                <ion-radio slot="start" value="G" checked></ion-radio>
+
+                <ion-label color="warning">N</ion-label>
+                <ion-radio slot="start" value="N"></ion-radio>
+
+                <ion-label color="danger">B</ion-label>
+                <ion-radio slot="start" value="B"></ion-radio>
+
+              </ion-radio-group>
+
+          </ion-col>
+
+          <ion-col class="align-self-end">
+             
+               <ion-input placeholder="600000" formControlName="thursdaySales" type="number" (keyup)="sales()" readonly></ion-input>
+            
+            </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col class="align-self-start">
+          <ion-input formControlName="friday" style="border-bottom:0px" readonly></ion-input>
+        </ion-col>
+        <ion-col class="align-self-center">
+
+              <ion-radio-group formControlName="fridayRate" (ionChange)="selectedFriday($event)">
+
+                <ion-label color="success">G</ion-label>
+                <ion-radio slot="start" value="G" checked></ion-radio>
+
+                <ion-label color="warning">N</ion-label>
+                <ion-radio slot="start" value="N"></ion-radio>
+
+                <ion-label color="danger">B</ion-label>
+                <ion-radio slot="start" value="B"></ion-radio>
+
+              </ion-radio-group>
+
+          </ion-col>
+
+          <ion-col class="align-self-end">
+             
+               <ion-input placeholder="600000" formControlName="fridaySales" type="number" (keyup)="sales()" readonly></ion-input>
+            
+            </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col class="align-self-start">
+          <ion-input formControlName="saturday" style="border-bottom:0px" readonly></ion-input>
+        </ion-col>
+        <ion-col class="align-self-center">
+
+              <ion-radio-group (ionChange)="selectedSaturday($event)" formControlName="saturdayRate">
+
+                <ion-label color="success">G</ion-label>
+                <ion-radio slot="start" value="G" checked></ion-radio>
+
+                <ion-label color="warning">N</ion-label>
+                <ion-radio slot="start" value="N"></ion-radio>
+
+                <ion-label color="danger">B</ion-label>
+                <ion-radio slot="start" value="B"></ion-radio>
+              </ion-radio-group>
+
+          </ion-col>
+
+          <ion-col class="align-self-end">
+             
+               <ion-input placeholder="600000" formControlName="saturdaySales" type="number" (keyup)="sales()" readonly></ion-input>
+            
+            </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col class="align-self-start">
+          <ion-input formControlName="sunday" style="border-bottom:0px" readonly></ion-input>
+        </ion-col>
+        <ion-col class="align-self-center">
+
+              <ion-radio-group (ionChange)="selectedSunday($event)" formControlName="sundayRate">
+
+                <ion-label color="success">G</ion-label>
+                <ion-radio slot="start" value="G" checked></ion-radio>
+
+                <ion-label color="warning">N</ion-label>
+                <ion-radio slot="start" value="N"></ion-radio>
+
+                <ion-label color="danger">B</ion-label>
+                <ion-radio slot="start" value="B"></ion-radio>
+
+              </ion-radio-group>
+
+          </ion-col>
+
+          <ion-col class="align-self-end">
+             
+               <ion-input placeholder="600000" formControlName="sundaySales" type="number" (keyup)="sales()" readonly></ion-input>
+            
+            </ion-col>
+    </ion-row>
+
+
+</ion-grid>
+<p>Sales in the Past Few Days; How much have you sold in the past three (3) days?</p>
+<ion-grid>
+
+  <ion-row>
+    <ion-col class="align-self-start">
+      <strong color="primary">Day of the Week</strong>
+    </ion-col>
+
+    <ion-col color="tertiary" class="align-self-end">
+        <strong>Amount Sold Per Day</strong>
+      </ion-col>
+  </ion-row>
+
+  <ion-row>
+      <ion-col class="align-self-start">
+       <ion-select formControlName="day1">
+         <ion-select-option [(value)]="days[i]" *ngFor="let day of days; let i = index">{{day}}</ion-select-option>
+       </ion-select>
+      </ion-col>
+
+      <ion-col class="align-self-end">
+          
+            <ion-input placeholder="90000" type="number"></ion-input>
+         
+        </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col class="align-self-start">
+         <ion-select formControlName="day2">
+           <ion-select-option [(value)]="days[i]" *ngFor="let day of days; let i = index">{{day}}</ion-select-option>
+         </ion-select>
+        </ion-col>
+
+        <ion-col class="align-self-end">
+            
+              <ion-input placeholder="90000" type="number"></ion-input>
+           
+          </ion-col>
+      </ion-row>
+
+      <ion-row>
+          <ion-col class="align-self-start">
+           <ion-select formControlName="day3">
+             <ion-select-option [(value)]="days[i]" *ngFor="let day of days; let i = index">{{day}}</ion-select-option>
+           </ion-select>
+          </ion-col>
+
+          <ion-col class="align-self-end">
+              
+                <ion-input placeholder="90000" type="number"></ion-input>
+             
+            </ion-col>
+        </ion-row>
+</ion-grid>
+<ion-button type="submit">Submit</ion-button>
+<!-- <ion-button (click)="redirect()"color="success" fill="solid"><ion-icon slot="end" name="arrow-forward"></ion-icon>Next</ion-button> -->
+
+</form>
+</ion-card>
+
+</ion-content>

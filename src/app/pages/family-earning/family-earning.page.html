@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/menu/landing"></ion-back-button>
+        </ion-buttons>
+    <ion-title>Family Earning</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<ion-item>
+  <ion-label position="stacked">Do you have a spouse?</ion-label>
+  <ion-select name="spouseExist" [(ngModel)]="spouseExist" (ionChange)="spouseCheck()">
+     <ion-select-option selected [value]="false" selected>No</ion-select-option>
+     <ion-select-option [value]="true">Yes</ion-select-option>
+   </ion-select>
+</ion-item>
+
+<div id="spouse">
+<ion-item>
+  <ion-label position="stacked">Does your spouse earn(Business/Employment)?</ion-label>
+  <ion-select name="spouseBusiness" [(ngModel)]="spouseBusiness" (ionChange)="businessCheck()">
+     <ion-select-option selected [value]="false">No</ion-select-option>
+     <ion-select-option [value]="true">Yes</ion-select-option>
+   </ion-select>
+</ion-item>
+</div>
+<form #userForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+<div id="spouseBusiness">
+
+<p>Balance Sheet</p>
+<ion-item>
+  <ion-label class="ion-text-wrap" placeholder="Amount in shillings like 900000" position="stacked">How much cash does s/he have?</ion-label>
+  <ion-input name="cash" [(ngModel)]="familyEarnings.cash" type="number"></ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label class="ion-text-wrap" placeholder="30000" position="stacked">How much is the stock value?</ion-label>
+  <ion-input name="stockvalue" [(ngModel)]="familyEarnings.stockValue" type="number"></ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label class="ion-text-wrap" position="stacked">What is the total value of fixed assets (land,buildings)?</ion-label>
+  <ion-input name="fixedAssets" [(ngModel)]="familyEarnings.fixedAssets" placeholder="30000" type="number"></ion-input>
+</ion-item>
+<p>Cash flow</p>
+<ion-item>
+  <ion-label class="ion-text-wrap" position="stacked">How much does s/he make in monthly sales?</ion-label>
+  <ion-input name="monthlySales" [(ngModel)]="familyEarnings.monthlySales" placeholder=98000 type="number"></ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label class="ion-text-wrap" position="stacked">How much does s/he spend in monthly purchases?</ion-label>
+  <ion-input name="monthlyPurchases" [(ngModel)]="familyEarnings.monthlyPurchases" placeholder="89000" type="number"></ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label class="ion-text-wrap" position="stacked">How much does s/he spend on operational expenses?</ion-label>
+  <ion-input name="operationalExpenses" [(ngModel)]="familyEarnings.operationalExpenses" placeholder="9000" type="number"></ion-input>
+</ion-item>
+
+</div>
+
+<ion-button color="primary" type="submit" fill="solid">Submit</ion-button>
+<!-- <ion-button href="/menu/home" color="tertiary" fill="solid"><ion-icon slot="front" name="arrow-back"></ion-icon>Back</ion-button> -->
+
+<!-- <ion-button (click)="redirect()" color="success" fill="solid"><ion-icon slot="end" name="arrow-forward"></ion-icon>Next</ion-button> -->
+
+</form>
+
+
+</ion-content>

@@ -1,0 +1,50 @@
+mat-radio-group mat-radio-button {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+  }
+
+  mat-label {
+    font-weight: bold;
+  }
+  mat-form-field {
+   width: 100%;
+  }
+  
+  .example-radio-button {
+    margin: 5px;
+  }
+
+  div {
+    padding: 5px;
+  }
+
+  ion-toggle {
+    --handle-border-radius: 5px 1px 1px 5px;
+  }
+
+  .submit {
+    background-color: #3880ff;
+    color: #fff;
+    margin-top: 10px;
+    width: 100%;
+    max-width: 540px;
+
+  }
+
+  .back {
+    background-color: #0cd1e8;
+    color: #fff;
+    width: 100%;
+    max-width: 540px;
+  }
+
+  hr {
+    border-bottom: 1px solid !important;
+    width: 100% !important;
+    display: block !important;   
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  
+  

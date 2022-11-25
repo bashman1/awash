@@ -1,0 +1,285 @@
+.home-header {
+    --ion-background-color: #2a3998;//#1f81c5;
+    color: #fff;
+}
+
+.main-header {
+    text-align: center;
+    padding: 1em;
+    color: #000 !important;
+}
+
+.main-header span {
+    display: block;
+}
+
+hr {
+    background-color: #2a3998;//#1f81c5;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.acct-balance {
+    color: #000;
+    font-size: larger;
+    font-weight: bold;
+    // padding: 40px;
+}
+
+
+
+.main-sub-menu span{
+    font-size: x-large;
+    font-weight: bolder;
+    // padding: 100px;
+    // text-align: center;
+    color:#2a3998;//#1f81c5;
+}
+
+.main-sub-menu {
+    // width: 90%;
+    margin: 0 auto;
+    // margin-top: 20px;
+    text-align: center;
+    padding: 20px;
+}
+.float-right{
+    text-align: right;
+}
+.resize{
+    font-size: 20px;
+}
+
+.top-main{
+height: 200px;
+width: 100%;
+background-color: #2a3998;//#1f81c5;
+}
+.bottom-main{
+margin-top: -40px;
+padding-left: 20px;
+padding-right: 20px;
+}
+.bottom-main ion-card{
+    padding: 20px;
+    width: 200px;
+    height: 100px;
+}
+.menu-img{
+    // margin-left:40%;
+    margin: 0 auto;
+    // margin-top: 10%;
+}
+
+.amt{
+    font-size: larger;
+}
+
+.main-card{
+    margin: 0px;
+    width: 100%;
+}
+
+.card-head{
+    background-color: #006bfa;
+    color: #fff !important;
+    font-weight: bold;
+}
+.card-head ion-card-subtitle{
+    color: #fff ;
+    // color: #fdf77b;
+    font-weight: bold;
+}
+.card-head ion-card-title{
+    color: #fff ;
+    // color: #fdf77b;
+    font-weight: bold;
+}
+.credit-card {
+    // background-color: red;
+    box-sizing:border-box;
+	margin: 0 auto;
+    z-index: 1000;
+    width: 320px;
+	height: 190px;
+	-webkit-perspective: 600px;
+	-moz-perspective: 600px;
+	perspective:600px; 
+    // margin-left: 5%;
+    margin-top: 5%;
+    border-radius: 10px;
+    border-width: medium;
+    background: linear-gradient(217deg, rgba(42, 57, 152, .1), rgba(255,0,0,0) 70.71%),
+            linear-gradient(127deg, rgba(42, 57, 152, .8), rgba(0,255,0,0) 70.71%),
+            linear-gradient(336deg, rgba(42, 57, 152, .5), rgba(42, 57, 152, 1) 70.71%);
+            
+    // background: linear-gradient(217deg, rgba(56, 128, 255, .1), rgba(255,0,0,0) 70.71%),
+    //         linear-gradient(127deg, rgba(56, 128, 255, .8), rgba(0,255,0,0) 70.71%),
+    //         linear-gradient(336deg, rgba(56, 128, 255, .5), rgba(56, 128, 255, 1) 70.71%);
+    
+}
+.name, .label {
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
+    margin-top: 5%;
+    margin-left: 3%;
+    width: 90%;
+
+}
+.custNo {
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
+    margin-top: 13px;
+    float: left;
+    // margin-left: 3%;
+
+    // width: 90%;
+}
+.card-row {
+    width:90%;
+    margin-top: 10px;
+}
+.genInfo {
+    margin-left: 5%;
+    width: 100%;
+    height: 100%;
+}
+.chip {
+    img {
+        max-width: 50px;
+        padding-top: 5%;
+        border-radius: 10% !important;
+        overflow: hidden;
+    }
+}
+.product {
+    font-weight: 900;
+    font-size: medium;
+    color: #fff;
+    justify-content: center
+}
+/* increase card size */
+.card_slide {
+    width: 90%;
+    height: 5%;
+    background: linear-gradient(197deg, rgba(42, 57, 152, 1) 0%, rgba(42, 57, 152, .4) 13.5%, rgba(42, 57, 152, .6) 33.33%, rgba(42, 57, 152, 1) 100%) !important;
+    // background: linear-gradient(197deg, rgba(56, 128, 255, 1) 0%, rgba(56, 128, 255, .4) 13.5%, rgba(56, 128, 255, .6) 33.33%, rgba(56, 128, 255, 1) 100%) !important;
+    box-shadow: 0px 14px 25px #fff;
+    border-radius: 5px;
+    
+}
+h4 {
+    margin-left: 2%;
+}
+.transactions {
+    background: rgba(56, 128, 255, .7);
+    box-shadow: 0 8px 8px -4px rgba(0, 0, 0, .1);
+    // box-shadow: none;
+    border-radius: 10px;
+    height: 60px;
+    margin-top: 2%;
+
+    .cover {
+      ion-icon {
+        border-radius: 25%;
+      }
+    }
+
+    ion-card-content {
+      padding: 0;
+    }
+
+    ion-col {
+      color: #fff;
+      font-weight: bold;
+      del {
+        color: #726c6c;
+      }
+     
+      ion-button {
+        --box-shadow: none;
+        --border-radius: 12px;
+      }
+    }
+
+  }
+
+  .loan-menu {
+    display: flex;
+    flex-direction: row;
+    margin-top: 44px;
+}
+.div1{
+    margin-left: 15%;
+    background-color: rgba(51, 94, 154,0.5);
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    text-align: center;
+}
+.div2{
+    margin-left: 15%;
+    background-color: rgba(51, 94, 154,0.5);
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    text-align: center;
+}
+.div3{
+    margin-left: 15%;
+  background-color: rgba(51, 94, 154,0.5);
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    text-align: center;
+}
+.icon {
+    color: aliceblue;
+    font-size: 30px;
+    margin-top: 20%;
+
+}
+
+.row {
+    height: 10vh;
+    margin-left: -2%;
+    margin-bottom: 2%;
+    
+}
+.new_style {
+    // background-color: aqua;
+    height: 10vh;
+    width: 90%;
+    display: inline-block;
+    flex-direction: row;
+    justify-content: center;
+    // margin: 50%;
+    align-items: center;
+    
+    // overflow: auto;
+}
+
+.icon-container{
+    border-radius: 8px;
+    border-color: red;
+    border-width: 4px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.label-container{
+    display: flex;
+    justify-content: center;
+    overflow-wrap: break-word; 
+    text-align: center;
+}
+
+.myicon {
+    font-size: 24px; 
+    color:#2a3998;
+  }

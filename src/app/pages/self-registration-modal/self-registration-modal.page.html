@@ -1,0 +1,31 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>selfRegistrationModal</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <!-- [routerLink]="['/self-registration']" routerLinkActive="router-link-active"  -->
+        <ion-card (click)="customer()">
+          <ion-card-header></ion-card-header>
+          <ion-card-content>
+            Member Self Registration
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+  
+      <ion-col size="12">
+        <!--  [routerLink]="['/institution-self-registration']" -->
+        <ion-card (click)="institution()">
+          <ion-card-header></ion-card-header>
+          <ion-card-content>
+            Institution Self Registration
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    </ion-grid>
+</ion-content>

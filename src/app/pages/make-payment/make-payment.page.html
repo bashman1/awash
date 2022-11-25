@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar class="top-header">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Make Payment</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <form (ngSubmit)="submit()" [formGroup]="paymentForm" *ngIf="paymentForm">
+      <ion-item>
+        <ion-label position="floating" >Select Channel</ion-label>
+        <ion-select (ionChange)="onChannelChange($event)" formControlName="payment_method" [interfaceOptions]="customPopoverOptions" interface="popover">
+          <ion-select-option value="AIRTEL MONEY">AIRTEL</ion-select-option>
+          <ion-select-option value="MTN MONEY">MTN</ion-select-option>
+          <!-- <ion-select-option value="VISA">VISA</ion-select-option> -->
+        </ion-select>
+        <ion-thumbnail slot="end" *ngIf="channelLogo!=null">
+          <img [src]="channelLogo">
+        </ion-thumbnail>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.paymentMethod">
+            <div class="error-message"
+              *ngIf="paymentForm.get('payment_method').hasError(validation.type) && (paymentForm.get('payment_method').dirty || paymentForm.get('payment_method').touched)">
+              {{ validation.message}}
+            </div>
+          </ng-container>
+        </div>
+        <!-- formControlName="channelCode" channelCode  <img src="{{'../../assets/img/centenary.png'}}" alt=""> -->
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" >Enter Your Member Number</ion-label>
+      <ion-input type="text"  formControlName="customerNumber" disabled=""></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.customerNumber">
+          <div class="error-message"
+            *ngIf="paymentForm.get('customerNumber').hasError(validation.type) && (paymentForm.get('customerNumber').dirty || paymentForm.get('customerNumber').touched)">
+            {{ validation.message}}
+          </div>
+        </ng-container>
+      </div>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label position="floating" >Phone Number</ion-label>
+      <ion-input type="text" formControlName="phoneNumber"></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.phoneNumber">
+          <div class="error-message"
+            *ngIf="paymentForm.get('phoneNumber').hasError(validation.type) && (paymentForm.get('phoneNumber').dirty || paymentForm.get('phoneNumber').touched)">
+            {{ validation.message}}
+          </div>
+        </ng-container>
+      </div>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label position="floating" >Enter Amount To Pay</ion-label>
+        <ion-input id="amt" (ionChange)="commas()" type="text"  pattern="^[\d,]+$" formControlName="amount"></ion-input>
+        <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.amount">
+          <div class="error-message"
+            *ngIf="paymentForm.get('amount').hasError(validation.type) && (paymentForm.get('amount').dirty || paymentForm.get('amount').touched)">
+            {{ validation.message}}
+          </div>
+        </ng-container>
+      </div>
+      </ion-item>
+      
+      <ion-button  [disabled]="paymentForm.invalid" (click)="presentAlertConfirm()" expand="block">Submit</ion-button> 
+
+      </form>
+  </ion-card>
+
+</ion-content> 

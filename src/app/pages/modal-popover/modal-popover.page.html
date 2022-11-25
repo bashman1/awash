@@ -1,0 +1,65 @@
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-toolbar class="top-header">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Pay Loan</ion-title>
+    </ion-toolbar>
+    </ion-card-header>
+    <ion-card-content>
+      <form (ngSubmit)="submit()" [formGroup]="paymentForm">
+    
+        <p>
+          <mat-form-field appearance="standard">
+            <mat-label>Loan Account</mat-label>
+            <input matInput formControlName="loanAcctNo" readonly [value]="loanAccountNumber" placeholder="Placeholder">            
+          </mat-form-field>
+        </p>
+
+    
+        <!-- <mat-form-field appearance="standard">
+          <mat-label>Choose Account</mat-label>
+          <select required formControlName="sourceAccount" matNativeControl >
+            <option *ngFor="let account of savingAccounts" [value]="account.acct_no">{{account.displayName}} - {{account.balance | number:'1.0-0'}}</option>
+          </select>
+        </mat-form-field> -->
+
+        <mat-form-field appearance="standard">
+          <mat-label>Amount</mat-label>
+          <input id="amountToRepay" type="text" required (keyup)="checkAmount(); login.formatCurrency('amountToRepay')" matInput formControlName="amountToRepay">
+        </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Repayment Date</mat-label>
+            <input [matDatepicker]="picker1" formControlName="rpmtDate" matInput
+                  [(max)]="date" placeholder="Repayment Date">
+            <mat-datepicker-toggle [for]="picker1" matSuffix></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>Description</mat-label>
+          <input type="textarea" matInput formControlName="description">
+        </mat-form-field>
+    
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6">
+              <ion-button class="ion-align-items-center" fill="outline" expand="block" color="warning" (click)="dismiss()">Cancel</ion-button>
+            </ion-col>
+            <ion-col size="6">
+              <ion-button class="ion-align-items-center" [disabled]="paymentForm.invalid" expand="block" color="primary" type="submit">Pay</ion-button>
+
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+    
+      </form>
+    </ion-card-content>
+  </ion-card>
+  
+
+</ion-content>

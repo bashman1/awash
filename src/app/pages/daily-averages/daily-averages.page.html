@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Daily Averages</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="dailyAverageForm" (ngSubmit)="submit()">
+    <ion-item>
+      
+      <ion-input formControlName="goodDay" type="number" placeholder="Amount on a Good day"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      
+      <ion-input formControlName="normalDay" type="number" placeholder="Amount on a Normal day"></ion-input>
+    </ion-item>
+      
+    <ion-item>
+      
+      <ion-input formControlName="badDay" type="number" placeholder="Amount on a Bad day"></ion-input>
+
+    </ion-item>  
+
+      <ion-button color="danger" (click)="dismiss()">Cancel</ion-button>
+      <ion-button color="primary" type="submit">Save</ion-button>
+  </form>
+ 
+
+
+
+</ion-content>
